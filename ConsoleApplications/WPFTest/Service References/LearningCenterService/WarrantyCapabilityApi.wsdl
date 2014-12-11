@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WarrantyCapabilityApi" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IWarrantyCapabilityApi_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsam:Addressing>
+          <wsp:Policy>
+            <wsam:AnonymousResponses />
+          </wsp:Policy>
+        </wsam:Addressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:7779/My Dell Learning Center/IWarrantyCapabilityApi?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:7779/My Dell Learning Center/IWarrantyCapabilityApi?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:7779/My Dell Learning Center/IWarrantyCapabilityApi?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Dell.Tribbles.Plugins.Warranty.Contracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWarrantyCapabilityApi_IsMachineRegistered_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsMachineRegistered" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_IsMachineRegistered_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsMachineRegisteredResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_IsKickStartApplicationInstalled_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsKickStartApplicationInstalled" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_IsKickStartApplicationInstalled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsKickStartApplicationInstalledResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_GetWarranties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarranties" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_GetWarranties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarrantiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IWarrantyCapabilityApi_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWarrantyCapabilityApi">
+    <wsdl:operation name="IsMachineRegistered">
+      <wsdl:input wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/IsMachineRegistered" message="tns:IWarrantyCapabilityApi_IsMachineRegistered_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/IsMachineRegisteredResponse" message="tns:IWarrantyCapabilityApi_IsMachineRegistered_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsKickStartApplicationInstalled">
+      <wsdl:input wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/IsKickStartApplicationInstalled" message="tns:IWarrantyCapabilityApi_IsKickStartApplicationInstalled_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/IsKickStartApplicationInstalledResponse" message="tns:IWarrantyCapabilityApi_IsKickStartApplicationInstalled_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWarranties">
+      <wsdl:input wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/GetWarranties" message="tns:IWarrantyCapabilityApi_GetWarranties_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/GetWarrantiesResponse" message="tns:IWarrantyCapabilityApi_GetWarranties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/Ping" message="tns:IWarrantyCapabilityApi_Ping_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWarrantyCapabilityApi/PingResponse" message="tns:IWarrantyCapabilityApi_Ping_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetNamedPipeBinding_IWarrantyCapabilityApi" type="tns:IWarrantyCapabilityApi">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IWarrantyCapabilityApi_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="IsMachineRegistered">
+      <soap12:operation soapAction="http://tempuri.org/IWarrantyCapabilityApi/IsMachineRegistered" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsKickStartApplicationInstalled">
+      <soap12:operation soapAction="http://tempuri.org/IWarrantyCapabilityApi/IsKickStartApplicationInstalled" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWarranties">
+      <soap12:operation soapAction="http://tempuri.org/IWarrantyCapabilityApi/GetWarranties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IWarrantyCapabilityApi/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WarrantyCapabilityApi">
+    <wsdl:port name="NetNamedPipeBinding_IWarrantyCapabilityApi" binding="tns:NetNamedPipeBinding_IWarrantyCapabilityApi">
+      <soap12:address location="net.pipe://localhost/My%20Dell%20Learning%20Center/IWarrantyCapabilityApi" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/My%20Dell%20Learning%20Center/IWarrantyCapabilityApi</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

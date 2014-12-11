@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="134d646d9f8f4245a22da90f8a82c969" Name="Diagram1">
+        <EntityTypeShape EntityType="StannumDBModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.ActionType" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.Category" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.DellLanguage" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.DellO" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.DellOsLanguage" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.Locale" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.Notification" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.NotificationServiceTag" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.NotificationType" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.O" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.Severity" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StannumDBModel.Status" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_ActionType_Action1ActionTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_ActionType_Action2ActionTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_Category_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Locale_stan_DellLanguage_DellLanguageId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_DellOsLanguage_stan_DellOs_DellOsId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Os_stan_DellOs_DellOsId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_NotificationType_NotificationTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_Severity_SeverityId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_Notification_stan_Status_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.FK_stan_NotificationServiceTag_stan_Notification_NotificationId" ManuallyRouted="false" />
+        <AssociationConnector Association="StannumDBModel.NotificationDellOsLanguage" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

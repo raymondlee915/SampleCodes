@@ -1,0 +1,900 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StannumDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DellLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DellOs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DellOsLanguage">
+          <Key>
+            <PropertyRef Name="DellOsId" />
+            <PropertyRef Name="DellLanguageId" />
+          </Key>
+          <Property Name="DellOsId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DellLanguageId" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="DellLanguageId" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="ShortDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CategoryId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SeverityId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="StatusId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Action1Text" Type="varchar(max)" Nullable="false" />
+          <Property Name="Action1Uri" Type="varchar(max)" Nullable="false" />
+          <Property Name="Action1ActionTypeId" Type="varchar" MaxLength="150" />
+          <Property Name="Action2Text" Type="varchar(max)" />
+          <Property Name="Action2Uri" Type="varchar(max)" />
+          <Property Name="Action2ActionTypeId" Type="varchar" MaxLength="150" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationDellOsLanguage">
+          <Key>
+            <PropertyRef Name="Notification_Id" />
+            <PropertyRef Name="DellOsLanguage_DellOsId" />
+            <PropertyRef Name="DellOsLanguage_DellLanguageId" />
+          </Key>
+          <Property Name="Notification_Id" Type="int" Nullable="false" />
+          <Property Name="DellOsLanguage_DellOsId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DellOsLanguage_DellLanguageId" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationServiceTag">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+            <PropertyRef Name="ServiceTag" />
+          </Key>
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="ServiceTag" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Os">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Architecture" Type="int" Nullable="false" />
+          <Property Name="Version" Type="varchar(max)" />
+          <Property Name="DellOsId" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Severity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId">
+          <End Role="DellLanguage" Type="Self.DellLanguage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DellOsLanguage">
+              <PropertyRef Name="DellLanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_DellOsLanguage_stan_DellOs_DellOsId">
+          <End Role="DellOs" Type="Self.DellOs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellOs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DellOsLanguage">
+              <PropertyRef Name="DellOsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Locale_stan_DellLanguage_DellLanguageId">
+          <End Role="DellLanguage" Type="Self.DellLanguage" Multiplicity="0..1" />
+          <End Role="Locale" Type="Self.Locale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locale">
+              <PropertyRef Name="DellLanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_ActionType_Action1ActionTypeId">
+          <End Role="ActionType" Type="Self.ActionType" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="Action1ActionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_ActionType_Action2ActionTypeId">
+          <End Role="ActionType" Type="Self.ActionType" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="Action2ActionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Category_CategoryId">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_NotificationType_NotificationTypeId">
+          <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Severity_SeverityId">
+          <End Role="Severity" Type="Self.Severity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Status_StatusId">
+          <End Role="Status" Type="Self.Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_NotificationDellOsLanguage_stan_DellOsLanguage_DellOsLanguage_DellOsId_DellOsLanguage_DellLanguageId">
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NotificationDellOsLanguage" Type="Self.NotificationDellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellOsLanguage">
+              <PropertyRef Name="DellOsId" />
+              <PropertyRef Name="DellLanguageId" />
+            </Principal>
+            <Dependent Role="NotificationDellOsLanguage">
+              <PropertyRef Name="DellOsLanguage_DellOsId" />
+              <PropertyRef Name="DellOsLanguage_DellLanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_NotificationDellOsLanguage_stan_Notification_Notification_Id">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NotificationDellOsLanguage" Type="Self.NotificationDellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotificationDellOsLanguage">
+              <PropertyRef Name="Notification_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_NotificationServiceTag_stan_Notification_NotificationId">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NotificationServiceTag" Type="Self.NotificationServiceTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotificationServiceTag">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Os_stan_DellOs_DellOsId">
+          <End Role="DellOs" Type="Self.DellOs" Multiplicity="0..1" />
+          <End Role="Os" Type="Self.Os" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellOs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Os">
+              <PropertyRef Name="DellOsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StannumDBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="ActionType" EntityType="Self.ActionType" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="DellLanguage" EntityType="Self.DellLanguage" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="DellOs" EntityType="Self.DellOs" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="DellOsLanguage" EntityType="Self.DellOsLanguage" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Locale" EntityType="Self.Locale" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="NotificationDellOsLanguage" EntityType="Self.NotificationDellOsLanguage" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="NotificationServiceTag" EntityType="Self.NotificationServiceTag" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Os" EntityType="Self.Os" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Severity" EntityType="Self.Severity" Schema="stan" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="stan" store:Type="Tables" />
+          <AssociationSet Name="FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId" Association="Self.FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId">
+            <End Role="DellLanguage" EntitySet="DellLanguage" />
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_DellOsLanguage_stan_DellOs_DellOsId" Association="Self.FK_stan_DellOsLanguage_stan_DellOs_DellOsId">
+            <End Role="DellOs" EntitySet="DellOs" />
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Locale_stan_DellLanguage_DellLanguageId" Association="Self.FK_stan_Locale_stan_DellLanguage_DellLanguageId">
+            <End Role="DellLanguage" EntitySet="DellLanguage" />
+            <End Role="Locale" EntitySet="Locale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_ActionType_Action1ActionTypeId" Association="Self.FK_stan_Notification_stan_ActionType_Action1ActionTypeId">
+            <End Role="ActionType" EntitySet="ActionType" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_ActionType_Action2ActionTypeId" Association="Self.FK_stan_Notification_stan_ActionType_Action2ActionTypeId">
+            <End Role="ActionType" EntitySet="ActionType" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Category_CategoryId" Association="Self.FK_stan_Notification_stan_Category_CategoryId">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_NotificationType_NotificationTypeId" Association="Self.FK_stan_Notification_stan_NotificationType_NotificationTypeId">
+            <End Role="NotificationType" EntitySet="NotificationType" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Severity_SeverityId" Association="Self.FK_stan_Notification_stan_Severity_SeverityId">
+            <End Role="Severity" EntitySet="Severity" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Status_StatusId" Association="Self.FK_stan_Notification_stan_Status_StatusId">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_NotificationDellOsLanguage_stan_DellOsLanguage_DellOsLanguage_DellOsId_DellOsLanguage_DellLanguageId" Association="Self.FK_stan_NotificationDellOsLanguage_stan_DellOsLanguage_DellOsLanguage_DellOsId_DellOsLanguage_DellLanguageId">
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguage" />
+            <End Role="NotificationDellOsLanguage" EntitySet="NotificationDellOsLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_NotificationDellOsLanguage_stan_Notification_Notification_Id" Association="Self.FK_stan_NotificationDellOsLanguage_stan_Notification_Notification_Id">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="NotificationDellOsLanguage" EntitySet="NotificationDellOsLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_NotificationServiceTag_stan_Notification_NotificationId" Association="Self.FK_stan_NotificationServiceTag_stan_Notification_NotificationId">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="NotificationServiceTag" EntitySet="NotificationServiceTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Os_stan_DellOs_DellOsId" Association="Self.FK_stan_Os_stan_DellOs_DellOsId">
+            <End Role="DellOs" EntitySet="DellOs" />
+            <End Role="Os" EntitySet="Os" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StannumDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_stan_Notification_stan_ActionType_Action1ActionTypeId" FromRole="ActionType" ToRole="Notification" />
+          <NavigationProperty Name="Notifications1" Relationship="Self.FK_stan_Notification_stan_ActionType_Action2ActionTypeId" FromRole="ActionType" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_stan_Notification_stan_Category_CategoryId" FromRole="Category" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="DellLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DellOsLanguages" Relationship="Self.FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId" FromRole="DellLanguage" ToRole="DellOsLanguage" />
+          <NavigationProperty Name="Locales" Relationship="Self.FK_stan_Locale_stan_DellLanguage_DellLanguageId" FromRole="DellLanguage" ToRole="Locale" />
+        </EntityType>
+        <EntityType Name="DellO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DellOsLanguages" Relationship="Self.FK_stan_DellOsLanguage_stan_DellOs_DellOsId" FromRole="DellOs" ToRole="DellOsLanguage" />
+          <NavigationProperty Name="Os" Relationship="Self.FK_stan_Os_stan_DellOs_DellOsId" FromRole="DellOs" ToRole="Os" />
+        </EntityType>
+        <EntityType Name="DellOsLanguage">
+          <Key>
+            <PropertyRef Name="DellOsId" />
+            <PropertyRef Name="DellLanguageId" />
+          </Key>
+          <Property Name="DellOsId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DellLanguageId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DellLanguage" Relationship="Self.FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId" FromRole="DellOsLanguage" ToRole="DellLanguage" />
+          <NavigationProperty Name="DellO" Relationship="Self.FK_stan_DellOsLanguage_stan_DellOs_DellOsId" FromRole="DellOsLanguage" ToRole="DellOs" />
+          <NavigationProperty Name="Notifications" Relationship="Self.NotificationDellOsLanguage" FromRole="DellOsLanguage" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Locale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DellLanguageId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DellLanguage" Relationship="Self.FK_stan_Locale_stan_DellLanguage_DellLanguageId" FromRole="Locale" ToRole="DellLanguage" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SeverityId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StatusId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Action1Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Action1Uri" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Action1ActionTypeId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Action2Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Action2Uri" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Action2ActionTypeId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ActionType" Relationship="Self.FK_stan_Notification_stan_ActionType_Action1ActionTypeId" FromRole="Notification" ToRole="ActionType" />
+          <NavigationProperty Name="ActionType1" Relationship="Self.FK_stan_Notification_stan_ActionType_Action2ActionTypeId" FromRole="Notification" ToRole="ActionType" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_stan_Notification_stan_Category_CategoryId" FromRole="Notification" ToRole="Category" />
+          <NavigationProperty Name="NotificationType" Relationship="Self.FK_stan_Notification_stan_NotificationType_NotificationTypeId" FromRole="Notification" ToRole="NotificationType" />
+          <NavigationProperty Name="Severity" Relationship="Self.FK_stan_Notification_stan_Severity_SeverityId" FromRole="Notification" ToRole="Severity" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_stan_Notification_stan_Status_StatusId" FromRole="Notification" ToRole="Status" />
+          <NavigationProperty Name="NotificationServiceTags" Relationship="Self.FK_stan_NotificationServiceTag_stan_Notification_NotificationId" FromRole="Notification" ToRole="NotificationServiceTag" />
+          <NavigationProperty Name="DellOsLanguages" Relationship="Self.NotificationDellOsLanguage" FromRole="Notification" ToRole="DellOsLanguage" />
+        </EntityType>
+        <EntityType Name="NotificationServiceTag">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+            <PropertyRef Name="ServiceTag" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTag" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notification" Relationship="Self.FK_stan_NotificationServiceTag_stan_Notification_NotificationId" FromRole="NotificationServiceTag" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_stan_Notification_stan_NotificationType_NotificationTypeId" FromRole="NotificationType" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="O">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Architecture" Type="Int32" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DellOsId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DellO" Relationship="Self.FK_stan_Os_stan_DellOs_DellOsId" FromRole="Os" ToRole="DellOs" />
+        </EntityType>
+        <EntityType Name="Severity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_stan_Notification_stan_Severity_SeverityId" FromRole="Severity" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_stan_Notification_stan_Status_StatusId" FromRole="Status" ToRole="Notification" />
+        </EntityType>
+        <Association Name="FK_stan_Notification_stan_ActionType_Action1ActionTypeId">
+          <End Role="ActionType" Type="Self.ActionType" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="Action1ActionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_ActionType_Action2ActionTypeId">
+          <End Role="ActionType" Type="Self.ActionType" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="Action2ActionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Category_CategoryId">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId">
+          <End Role="DellLanguage" Type="Self.DellLanguage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DellOsLanguage">
+              <PropertyRef Name="DellLanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Locale_stan_DellLanguage_DellLanguageId">
+          <End Role="DellLanguage" Type="Self.DellLanguage" Multiplicity="0..1" />
+          <End Role="Locale" Type="Self.Locale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locale">
+              <PropertyRef Name="DellLanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_DellOsLanguage_stan_DellOs_DellOsId">
+          <End Role="DellOs" Type="Self.DellO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellOs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DellOsLanguage">
+              <PropertyRef Name="DellOsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Os_stan_DellOs_DellOsId">
+          <End Role="DellOs" Type="Self.DellO" Multiplicity="0..1" />
+          <End Role="Os" Type="Self.O" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DellOs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Os">
+              <PropertyRef Name="DellOsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_NotificationType_NotificationTypeId">
+          <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Severity_SeverityId">
+          <End Role="Severity" Type="Self.Severity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_Notification_stan_Status_StatusId">
+          <End Role="Status" Type="Self.Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stan_NotificationServiceTag_stan_Notification_NotificationId">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NotificationServiceTag" Type="Self.NotificationServiceTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotificationServiceTag">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NotificationDellOsLanguage">
+          <End Role="DellOsLanguage" Type="Self.DellOsLanguage" Multiplicity="*" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="StannumDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="ActionTypes" EntityType="Self.ActionType" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DellLanguages" EntityType="Self.DellLanguage" />
+          <EntitySet Name="DellOs" EntityType="Self.DellO" />
+          <EntitySet Name="DellOsLanguages" EntityType="Self.DellOsLanguage" />
+          <EntitySet Name="Locales" EntityType="Self.Locale" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="NotificationServiceTags" EntityType="Self.NotificationServiceTag" />
+          <EntitySet Name="NotificationTypes" EntityType="Self.NotificationType" />
+          <EntitySet Name="Os" EntityType="Self.O" />
+          <EntitySet Name="Severities" EntityType="Self.Severity" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <AssociationSet Name="FK_stan_Notification_stan_ActionType_Action1ActionTypeId" Association="Self.FK_stan_Notification_stan_ActionType_Action1ActionTypeId">
+            <End Role="ActionType" EntitySet="ActionTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_ActionType_Action2ActionTypeId" Association="Self.FK_stan_Notification_stan_ActionType_Action2ActionTypeId">
+            <End Role="ActionType" EntitySet="ActionTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Category_CategoryId" Association="Self.FK_stan_Notification_stan_Category_CategoryId">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId" Association="Self.FK_stan_DellOsLanguage_stan_DellLanguage_DellLanguageId">
+            <End Role="DellLanguage" EntitySet="DellLanguages" />
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Locale_stan_DellLanguage_DellLanguageId" Association="Self.FK_stan_Locale_stan_DellLanguage_DellLanguageId">
+            <End Role="DellLanguage" EntitySet="DellLanguages" />
+            <End Role="Locale" EntitySet="Locales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_DellOsLanguage_stan_DellOs_DellOsId" Association="Self.FK_stan_DellOsLanguage_stan_DellOs_DellOsId">
+            <End Role="DellOs" EntitySet="DellOs" />
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Os_stan_DellOs_DellOsId" Association="Self.FK_stan_Os_stan_DellOs_DellOsId">
+            <End Role="DellOs" EntitySet="DellOs" />
+            <End Role="Os" EntitySet="Os" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_NotificationType_NotificationTypeId" Association="Self.FK_stan_Notification_stan_NotificationType_NotificationTypeId">
+            <End Role="NotificationType" EntitySet="NotificationTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Severity_SeverityId" Association="Self.FK_stan_Notification_stan_Severity_SeverityId">
+            <End Role="Severity" EntitySet="Severities" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_Notification_stan_Status_StatusId" Association="Self.FK_stan_Notification_stan_Status_StatusId">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stan_NotificationServiceTag_stan_Notification_NotificationId" Association="Self.FK_stan_NotificationServiceTag_stan_Notification_NotificationId">
+            <End Role="Notification" EntitySet="Notifications" />
+            <End Role="NotificationServiceTag" EntitySet="NotificationServiceTags" />
+          </AssociationSet>
+          <AssociationSet Name="NotificationDellOsLanguage" Association="Self.NotificationDellOsLanguage">
+            <End Role="DellOsLanguage" EntitySet="DellOsLanguages" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StannumDBModelStoreContainer" CdmEntityContainer="StannumDBEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="StannumDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTypes">
+            <EntityTypeMapping TypeName="StannumDBModel.ActionType">
+              <MappingFragment StoreEntitySet="ActionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="StannumDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DellLanguages">
+            <EntityTypeMapping TypeName="StannumDBModel.DellLanguage">
+              <MappingFragment StoreEntitySet="DellLanguage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DellOs">
+            <EntityTypeMapping TypeName="StannumDBModel.DellO">
+              <MappingFragment StoreEntitySet="DellOs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DellOsLanguages">
+            <EntityTypeMapping TypeName="StannumDBModel.DellOsLanguage">
+              <MappingFragment StoreEntitySet="DellOsLanguage">
+                <ScalarProperty Name="DellOsId" ColumnName="DellOsId" />
+                <ScalarProperty Name="DellLanguageId" ColumnName="DellLanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locales">
+            <EntityTypeMapping TypeName="StannumDBModel.Locale">
+              <MappingFragment StoreEntitySet="Locale">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DellLanguageId" ColumnName="DellLanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="StannumDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SeverityId" ColumnName="SeverityId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Action1Text" ColumnName="Action1Text" />
+                <ScalarProperty Name="Action1Uri" ColumnName="Action1Uri" />
+                <ScalarProperty Name="Action1ActionTypeId" ColumnName="Action1ActionTypeId" />
+                <ScalarProperty Name="Action2Text" ColumnName="Action2Text" />
+                <ScalarProperty Name="Action2Uri" ColumnName="Action2Uri" />
+                <ScalarProperty Name="Action2ActionTypeId" ColumnName="Action2ActionTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationServiceTags">
+            <EntityTypeMapping TypeName="StannumDBModel.NotificationServiceTag">
+              <MappingFragment StoreEntitySet="NotificationServiceTag">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="ServiceTag" ColumnName="ServiceTag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTypes">
+            <EntityTypeMapping TypeName="StannumDBModel.NotificationType">
+              <MappingFragment StoreEntitySet="NotificationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Os">
+            <EntityTypeMapping TypeName="StannumDBModel.O">
+              <MappingFragment StoreEntitySet="Os">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Architecture" ColumnName="Architecture" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="DellOsId" ColumnName="DellOsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Severities">
+            <EntityTypeMapping TypeName="StannumDBModel.Severity">
+              <MappingFragment StoreEntitySet="Severity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="StannumDBModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NotificationDellOsLanguage" TypeName="StannumDBModel.NotificationDellOsLanguage" StoreEntitySet="NotificationDellOsLanguage">
+            <EndProperty Name="DellOsLanguage">
+              <ScalarProperty Name="DellOsId" ColumnName="DellOsLanguage_DellOsId" />
+              <ScalarProperty Name="DellLanguageId" ColumnName="DellOsLanguage_DellLanguageId" />
+            </EndProperty>
+            <EndProperty Name="Notification">
+              <ScalarProperty Name="Id" ColumnName="Notification_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
