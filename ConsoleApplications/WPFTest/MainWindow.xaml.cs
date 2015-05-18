@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +26,10 @@ namespace WPFTest
     {
         public MainWindow()
         {
+           //Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-tw");
+
             InitializeComponent();
+            testText.Text = WPFTest.Properties.Resources.Test;
         }
 
         private void Grid_Initialized(object sender, EventArgs e)

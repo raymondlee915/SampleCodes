@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -627,274 +629,44 @@ namespace CountryCode
             }
         }
 
-        public static Dictionary<string, string> CountryCodeMapping
-        {
-            get
-            {
-                if (countryCodeMapping == null)
-                {
-                    countryCodeMapping = new Dictionary<string, string>();
-                    countryCodeMapping.Add("Afghanistan", "AF");
-                    countryCodeMapping.Add("Albania", "AL");
-                    countryCodeMapping.Add("Algeria", "DZ");
-                    countryCodeMapping.Add("American Samoa", "AS");
-                    countryCodeMapping.Add("Andorra", "AD");
-                    countryCodeMapping.Add("Angola", "AO");
-                    countryCodeMapping.Add("Anguilla", "AI");
-                    countryCodeMapping.Add("Antarctica", "AQ");
-                    countryCodeMapping.Add("Antigua and Barbuda", "AG");
-                    countryCodeMapping.Add("Argentina", "AR");
-                    countryCodeMapping.Add("Armenia", "AM");
-                    countryCodeMapping.Add("Aruba", "AW");
-                    countryCodeMapping.Add("Australia", "AU");
-                    countryCodeMapping.Add("Austria", "AT");
-                    countryCodeMapping.Add("Azerbaijan", "AZ");
-                    countryCodeMapping.Add("Bahamas, The", "BS");
-                    countryCodeMapping.Add("Bahrain", "BH");
-                    countryCodeMapping.Add("Bangladesh", "BD");
-                    countryCodeMapping.Add("Barbados", "BB");
-                    countryCodeMapping.Add("Belarus", "BY");
-                    countryCodeMapping.Add("Belgium", "BE");
-                    countryCodeMapping.Add("Belize", "BZ");
-                    countryCodeMapping.Add("Benin", "BJ");
-                    countryCodeMapping.Add("Bermuda", "BM");
-                    countryCodeMapping.Add("Bhutan", "BT");
-                    countryCodeMapping.Add("Bolivia", "BO");
-                    countryCodeMapping.Add("Bosnia and Herzegovina", "BA");
-                    countryCodeMapping.Add("Botswana", "BW");
-                    countryCodeMapping.Add("Bouvet Island", "BV");
-                    countryCodeMapping.Add("Brazil", "BR");
-                    countryCodeMapping.Add("British Indian Ocean Territory", "IO");
-                    countryCodeMapping.Add("Brunei", "BN");
-                    countryCodeMapping.Add("Bulgaria", "BG");
-                    countryCodeMapping.Add("Burkina Faso", "BF");
-                    countryCodeMapping.Add("Burundi", "BI");
-                    countryCodeMapping.Add("Côte d'Ivoire", "CI");
-                    countryCodeMapping.Add("Cambodia", "KH");
-                    countryCodeMapping.Add("Cameroon", "CM");
-                    countryCodeMapping.Add("Canada", "CA");
-                    countryCodeMapping.Add("Cape Verde", "CV");
-                    countryCodeMapping.Add("Cayman Islands", "KY");
-                    countryCodeMapping.Add("Central African Republic", "CF");
-                    countryCodeMapping.Add("Chad", "TD");
-                    countryCodeMapping.Add("Channel Islands", "GB-CHA");
-                    countryCodeMapping.Add("Chile", "CL");
-                    countryCodeMapping.Add("China", "CN");
-                    countryCodeMapping.Add("Christmas Island", "CX");
-                    countryCodeMapping.Add("Cocos (Keeling) Islands", "CC");
-                    countryCodeMapping.Add("Colombia", "CO");
-                    countryCodeMapping.Add("Comoros", "KM");
-                    countryCodeMapping.Add("Congo", "CG");
-                    countryCodeMapping.Add("Congo (DRC)", "CD");
-                    countryCodeMapping.Add("Cook Islands", "CK");
-                    countryCodeMapping.Add("Coral Sea Islands", "AU");
-                    countryCodeMapping.Add("Costa Rica", "CR");
-                    countryCodeMapping.Add("Croatia", "HR");
-                    countryCodeMapping.Add("Cuba", "CU");
-                    countryCodeMapping.Add("Cyprus", "CY");
-                    countryCodeMapping.Add("Czech Republic", "CZ");
-                    countryCodeMapping.Add("Denmark", "DK");
-                    countryCodeMapping.Add("Djibouti", "DJ");
-                    countryCodeMapping.Add("Dominica", "DM");
-                    countryCodeMapping.Add("Dominican Republic", "DO");
-                    countryCodeMapping.Add("Ecuador", "EC");
-                    countryCodeMapping.Add("Egypt", "EG");
-                    countryCodeMapping.Add("El Salvador", "SV");
-                    countryCodeMapping.Add("Equatorial Guinea", "GQ");
-                    countryCodeMapping.Add("Eritrea", "ER");
-                    countryCodeMapping.Add("Estonia", "EE");
-                    countryCodeMapping.Add("Ethiopia", "ET");
-                    countryCodeMapping.Add("Falkland Islands (Islas Malvinas)", "FK");
-                    countryCodeMapping.Add("Faroe Islands", "FO");
-                    countryCodeMapping.Add("Fiji Islands", "FJ");
-                    countryCodeMapping.Add("Finland", "FI");
-                    countryCodeMapping.Add("France", "FR");
-                    countryCodeMapping.Add("France, Metropolitan", "FX");
-                    countryCodeMapping.Add("French Guiana", "GF");
-                    countryCodeMapping.Add("French Polynesia", "PF");
-                    countryCodeMapping.Add("French Southern and Antarctic Lands", "TF");
-                    countryCodeMapping.Add("Gabon", "GA");
-                    countryCodeMapping.Add("Gambia, The", "GM");
-                    countryCodeMapping.Add("Georgia", "GE");
-                    countryCodeMapping.Add("Germany", "DE");
-                    countryCodeMapping.Add("Ghana", "GH");
-                    countryCodeMapping.Add("Gibraltar", "GI");
-                    countryCodeMapping.Add("Greece", "GR");
-                    countryCodeMapping.Add("Greenland", "GL");
-                    countryCodeMapping.Add("Grenada", "GD");
-                    countryCodeMapping.Add("Guadeloupe", "GP");
-                    countryCodeMapping.Add("Guam", "GU");
-                    countryCodeMapping.Add("Guatemala", "GT");
-                    countryCodeMapping.Add("Guernsey", "GB-GSY");
-                    countryCodeMapping.Add("Guinea", "GN");
-                    countryCodeMapping.Add("Guinea-Bissau", "GW");
-                    countryCodeMapping.Add("Guyana", "GY");
-                    countryCodeMapping.Add("Haiti", "HT");
-                    countryCodeMapping.Add("Heard Island and McDonald Islands", "HM");
-                    countryCodeMapping.Add("Honduras", "HN");
-                    countryCodeMapping.Add("Hong Kong S.A.R.", "HK");
-                    countryCodeMapping.Add("Hungary", "HU");
-                    countryCodeMapping.Add("Iceland", "IS");
-                    countryCodeMapping.Add("India", "IN");
-                    countryCodeMapping.Add("Indonesia", "ID");
-                    countryCodeMapping.Add("Iran", "IR");
-                    countryCodeMapping.Add("Iraq", "IQ");
-                    countryCodeMapping.Add("Ireland", "IE");
-                    countryCodeMapping.Add("Israel", "IL");
-                    countryCodeMapping.Add("Italy", "IT");
-                    countryCodeMapping.Add("Jamaica", "JM");
-                    countryCodeMapping.Add("Japan", "JP");
-                    countryCodeMapping.Add("Jersey", "GB-JSY");
-                    countryCodeMapping.Add("Jordan", "JO");
-                    countryCodeMapping.Add("Kazakhstan", "KZ");
-                    countryCodeMapping.Add("Kenya", "KE");
-                    countryCodeMapping.Add("Kiribati", "KI");
-                    countryCodeMapping.Add("Korea", "KR");
-                    countryCodeMapping.Add("Kuwait", "KW");
-                    countryCodeMapping.Add("Kyrgyzstan", "KG");
-                    countryCodeMapping.Add("Laos", "LA");
-                    countryCodeMapping.Add("Latvia", "LV");
-                    countryCodeMapping.Add("Lebanon", "LB");
-                    countryCodeMapping.Add("Lesotho", "LS");
-                    countryCodeMapping.Add("Liberia", "LR");
-                    countryCodeMapping.Add("Libya", "LY");
-                    countryCodeMapping.Add("Liechtenstein", "LI");
-                    countryCodeMapping.Add("Lithuania", "LT");
-                    countryCodeMapping.Add("Luxembourg", "LU");
-                    countryCodeMapping.Add("Macau S.A.R.", "MO");
-                    countryCodeMapping.Add("Macedonia, Former Yugoslav Republic of", "MK");
-                    countryCodeMapping.Add("Madagascar", "MG");
-                    countryCodeMapping.Add("Malawi", "MW");
-                    countryCodeMapping.Add("Malaysia", "MY");
-                    countryCodeMapping.Add("Maldives", "MV");
-                    countryCodeMapping.Add("Mali", "ML");
-                    countryCodeMapping.Add("Malta", "MT");
-                    countryCodeMapping.Add("Man, Isle of", "GB-IOM");
-                    countryCodeMapping.Add("Marshall Islands", "MH");
-                    countryCodeMapping.Add("Martinique", "MQ");
-                    countryCodeMapping.Add("Mauritania", "MR");
-                    countryCodeMapping.Add("Mauritius", "MU");
-                    countryCodeMapping.Add("Mayotte", "YT");
-                    countryCodeMapping.Add("Mexico", "MX");
-                    countryCodeMapping.Add("Micronesia", "FM");
-                    countryCodeMapping.Add("Moldova", "MD");
-                    countryCodeMapping.Add("Monaco", "MC");
-                    countryCodeMapping.Add("Mongolia", "MN");
-                    countryCodeMapping.Add("Montserrat", "MS");
-                    countryCodeMapping.Add("Morocco", "MA");
-                    countryCodeMapping.Add("Mozambique", "MZ");
-                    countryCodeMapping.Add("Myanmar", "MM");
-                    countryCodeMapping.Add("Namibia", "NA");
-                    countryCodeMapping.Add("Nauru", "NR");
-                    countryCodeMapping.Add("Nepal", "NP");
-                    countryCodeMapping.Add("Netherlands Antilles", "AN");
-                    countryCodeMapping.Add("Netherlands, The", "NL");
-                    countryCodeMapping.Add("New Caledonia", "NC");
-                    countryCodeMapping.Add("New Zealand", "NZ");
-                    countryCodeMapping.Add("Nicaragua", "NI");
-                    countryCodeMapping.Add("Niger", "NE");
-                    countryCodeMapping.Add("Nigeria", "NG");
-                    countryCodeMapping.Add("Niue", "NU");
-                    countryCodeMapping.Add("Norfolk Island", "NF");
-                    countryCodeMapping.Add("North Korea", "KP");
-                    countryCodeMapping.Add("Northern Mariana Islands", "MP");
-                    countryCodeMapping.Add("Norway", "NO");
-                    countryCodeMapping.Add("Oman", "OM");
-                    countryCodeMapping.Add("Pakistan", "PK");
-                    countryCodeMapping.Add("Palau", "PW");
-                    countryCodeMapping.Add("Panama", "PA");
-                    countryCodeMapping.Add("Papua New Guinea", "PG");
-                    countryCodeMapping.Add("Paraguay", "PY");
-                    countryCodeMapping.Add("Peru", "PE");
-                    countryCodeMapping.Add("Philippines", "PH");
-                    countryCodeMapping.Add("Pitcairn Islands", "PN");
-                    countryCodeMapping.Add("Poland", "PL");
-                    countryCodeMapping.Add("Portugal", "PT");
-                    countryCodeMapping.Add("Puerto Rico", "PR");
-                    countryCodeMapping.Add("Qatar", "QA");
-                    countryCodeMapping.Add("Reunion", "RE");
-                    countryCodeMapping.Add("Romania", "RO");
-                    countryCodeMapping.Add("Russia", "RU");
-                    countryCodeMapping.Add("Rwanda", "RW");
-                    countryCodeMapping.Add("São Tomé and Príncipe", "ST");
-                    countryCodeMapping.Add("Samoa", "WS");
-                    countryCodeMapping.Add("San Marino", "SM");
-                    countryCodeMapping.Add("Saudi Arabia", "SA");
-                    countryCodeMapping.Add("Senegal", "SN");
-                    countryCodeMapping.Add("Serbia and Montenegro", "YU");
-                    countryCodeMapping.Add("Montenegro", "ME");
-                    countryCodeMapping.Add("Serbia", "RS");
-                    countryCodeMapping.Add("Seychelles", "SC");
-                    countryCodeMapping.Add("Sierra Leone", "SL");
-                    countryCodeMapping.Add("Singapore", "SG");
-                    countryCodeMapping.Add("Slovakia", "SK");
-                    countryCodeMapping.Add("Slovenia", "SI");
-                    countryCodeMapping.Add("Solomon Islands", "SB");
-                    countryCodeMapping.Add("Somalia", "SO");
-                    countryCodeMapping.Add("South Africa", "ZA");
-                    countryCodeMapping.Add("South Georgia and the South Sandwich Islands", "GS");
-                    countryCodeMapping.Add("Spain", "ES");
-                    countryCodeMapping.Add("Sri Lanka", "LK");
-                    countryCodeMapping.Add("St. Helena", "SH");
-                    countryCodeMapping.Add("St. Kitts and Nevis", "KN");
-                    countryCodeMapping.Add("St. Lucia", "LC");
-                    countryCodeMapping.Add("St. Pierre and Miquelon", "PM");
-                    countryCodeMapping.Add("St. Vincent and the Grenadines", "VC");
-                    countryCodeMapping.Add("Sudan", "SD");
-                    countryCodeMapping.Add("Suriname", "SR");
-                    countryCodeMapping.Add("Svalbard and Jan Mayen", "SJ");
-                    countryCodeMapping.Add("Swaziland", "SZ");
-                    countryCodeMapping.Add("Sweden", "SE");
-                    countryCodeMapping.Add("Switzerland", "CH");
-                    countryCodeMapping.Add("Syria", "SY");
-                    countryCodeMapping.Add("Tajikistan", "TJ");
-                    countryCodeMapping.Add("Tanzania", "TZ");
-                    countryCodeMapping.Add("Thailand", "TH");
-                    countryCodeMapping.Add("Timor-Leste", "TP");
-                    countryCodeMapping.Add("Togo", "TG");
-                    countryCodeMapping.Add("Tokelau", "TK");
-                    countryCodeMapping.Add("Tonga", "TO");
-                    countryCodeMapping.Add("Trinidad and Tobago", "TT");
-                    countryCodeMapping.Add("Tunisia", "TN");
-                    countryCodeMapping.Add("Turkey", "TR");
-                    countryCodeMapping.Add("Turkmenistan", "TM");
-                    countryCodeMapping.Add("Turks and Caicos Islands", "TC");
-                    countryCodeMapping.Add("Tuvalu", "TV");
-                    countryCodeMapping.Add("U.S. Minor Outlying Islands", "UM");
-                    countryCodeMapping.Add("Uganda", "UG");
-                    countryCodeMapping.Add("Ukraine", "UA");
-                    countryCodeMapping.Add("United Arab Emirates", "AE");
-                    countryCodeMapping.Add("United Kingdom", "GB");
-                    countryCodeMapping.Add("United States", "US");
-                    countryCodeMapping.Add("Uruguay", "UY");
-                    countryCodeMapping.Add("Uzbekistan", "UZ");
-                    countryCodeMapping.Add("Vanuatu", "VU");
-                    countryCodeMapping.Add("Vatican City", "VA");
-                    countryCodeMapping.Add("Venezuela", "VE");
-                    countryCodeMapping.Add("Viet Nam", "VN");
-                    countryCodeMapping.Add("Virgin Islands", "VI");
-                    countryCodeMapping.Add("Virgin Islands, British", "VG");
-                    countryCodeMapping.Add("Wallis and Futuna", "WF");
-                    countryCodeMapping.Add("Yemen", "YE");
-                    countryCodeMapping.Add("Zambia", "ZM");
-                    countryCodeMapping.Add("Zimbabwe", "ZW");
-                }
-
-                return countryCodeMapping;
-            }
-        }
-
         static void Main(string[] args)
         {
+            KSRegion[] regions = null;
+            using (StreamReader reader = new StreamReader(File.OpenRead("config.js")))
+            {
+                string output = reader.ReadToEnd();
+                regions = JsonConvert.DeserializeObject<KSRegion[]>(output);
+            }
+
+            if (regions == null || regions.Length == 0)
+            {
+                Console.WriteLine("failed to read configruation");
+                return;
+            }
+
             foreach (var item in CountryNames)
             {
                 if (!ISOMapping.ContainsKey(item))
                 {
-                    Console.WriteLine(item);
+                    // Console.WriteLine(item);
+                }
+                else
+                {
+                    var code = ISOMapping[item];
+
+                    var continent = regions.FirstOrDefault(p => p.countries.Contains(code));
+                    if (continent != null)
+                    {
+                        Console.WriteLine("{0}--{1}", code, continent.file);
+
+                    }
+                    else
+                    {
+                        // cannot find a configruation file for this country.
+                        Console.WriteLine("{0}--{1}", code,  item);
+                    }
                 }
             }
-
-
         }
     }
 }
