@@ -1,0 +1,981 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DCF.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents">
+             <summary>
+             This static class contains the identifiers of all the events that the Agent publishes.  
+             </summary>
+             <remarks>
+             This static class contains the identifiers of all the events that the Agent publishes.  Agent plugins may subscribe to these
+             events by calling the IAgent's <see cref="M:Dell.Client.Framework.Agent.IAgent.RegisterForEvent(System.String,Dell.Client.Framework.Common.EventManagerHandler)"/> method.  The registration for these events is typically
+             done in a plugin's constructor.
+             <para>
+             Below is an example of a plugin constructor that subscribes to two events and passes handlers to be called when those
+             events are fired.
+             <code>
+             public MyAgentPlugin(IAgent agent)
+             {
+                 Agent.RegisterForEvent(AgentEvents.PluginStatusChangedEvent, OnPluginStateChanged);
+                 Agent.RegisterForEvent(AgentEvents.PoliciesUpdatedEvent, OnPoliciesUpdated);
+             }
+             
+             private void OnPluginStateChanged(object sender, EventManagerArgs args)
+             {
+                 if (args is AgentEvents.PluginStatusChangedEventArgs)
+                     host.OnUpdatePluginInfo(XmlHelper.SerializeObject(((AgentEvents.PluginStatusChangedEventArgs)args).Info));
+             }
+            
+             private void OnPoliciesUpdated(object sender, EventManagerArgs args)
+             {
+                 string xmlNewPolicies = Agent.GetPolicyInformation();
+             }
+             </code>
+             </para>
+             </remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.PluginStatusChangedEvent">
+            <summary>
+            This event is raised when any Agent plugin updates its status.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.PoliciesUpdatedEvent">
+            <summary>
+            This event is raised when the Agent receives a new policy from the server.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.PowerBroadcastEvent">
+            <summary>
+            This event is raised when a <see cref="T:System.ServiceProcess.PowerBroadcastStatus"/> event is received in 
+            the Agent service from Windows.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.SessionChangeEvent">
+            <summary>
+            This event is raised when a <see cref="T:System.ServiceProcess.SessionChangeDescription"/> event is received in 
+            the Agent service from Windows.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.ShutdownEvent">
+            <summary>
+            This event is raised when the system is shutting down.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserLogon">
+            <summary>
+            This event is raised when a user logs into Windows.  
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChange">
+            <summary>
+            This event is raised when a user changes their Windows password.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents.PluginStatusChangedEventArgs">
+            <summary>
+            Provides data for the <see cref="F:Dell.Client.Framework.Agent.AgentEvents.PluginStatusChangedEvent"/> event.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.PluginStatusChangedEventArgs.Info">
+            <summary>
+            This list of information for all the agent plugins.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.PluginStatusChangedEventArgs.#ctor(System.Collections.Generic.List{Dell.Client.Framework.Common.AgentPluginInfo})">
+            <summary>
+            Initializes a new instance of the class with a list of Agent plugin information.
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents.PowerBroadcastEventArgs">
+            <summary>
+            Provides data for the <see cref="F:Dell.Client.Framework.Agent.AgentEvents.PowerBroadcastEvent"/> event. 
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.PowerBroadcastEventArgs.Status">
+            <summary>
+            The broadcast status value.  See <see cref="T:System.ServiceProcess.PowerBroadcastStatus"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.PowerBroadcastEventArgs.#ctor(System.ServiceProcess.PowerBroadcastStatus)">
+            <summary>
+            Initializes a new instance of the class with the given PowerBroadcastStatus.
+            </summary>
+            <param name="status"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents.SessionChangeEventArgs">
+            <summary>
+            Provides data for the <see cref="F:Dell.Client.Framework.Agent.AgentEvents.SessionChangeEvent"/> event.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.SessionChangeEventArgs.Description">
+            <summary>
+            Identifies the reason for a session change.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.SessionChangeEventArgs.#ctor(System.ServiceProcess.SessionChangeDescription)">
+            <summary>
+            Initializes a new instance of the class with a reason for the session change.
+            </summary>
+            <param name="desc"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs">
+            <summary>
+            Provides data for the <see cref="F:Dell.Client.Framework.Agent.AgentEvents.UserLogon"/> event.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.Domain">
+            <summary>
+            User's domain
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.UserName">
+            <summary>
+            User name
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.Password">
+            <summary>
+            User's password in a secure string
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.UserSid">
+            <summary>
+            User's System identifier
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Construct the object by providing the domain, user name, and user password
+            </summary>
+            <param name="domain"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.UserLogonEventArgs.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Construct the object by providing the domain, user name, user password, and user identifier
+            </summary>
+            <param name="domain"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="sid"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs">
+            <summary>
+            Provides data for the <see cref="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChange"/> event.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs.Domain">
+            <summary>
+            User's domain
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs.UserName">
+            <summary>
+            User name
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs.NewPass">
+            <summary>
+            User's new password in a secure string
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs.PrevPass">
+            <summary>
+            User's old password in a secure string
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.AgentEvents.UserPasswordChangeEventArgs.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initialize a new instance of the class.
+            </summary>
+            <param name="domain">User's domain.</param>
+            <param name="username">User name.</param>
+            <param name="newPass">User's new password.</param>
+            <param name="prevPass">User's old password.</param>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.BaseAgentPlugin">
+            <summary>
+            Provides a base class for creating threaded Agent plugins.  An agent plugin need only derive from 
+            the IAgentPlugin interface to be loaded by the Agent.  This base class derives from IAgentPlugin and provides
+            threading support for an Agent plugin so that a plugin may simply derive from this class and override
+            methods that is cares to process.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.IAgentPlugin">
+            <summary>
+            This interface defines the methods that an Agent plugin must implement in 
+            order to be loaded by the Framework's Agent.
+            </summary>
+            <remarks>
+            This interface defines the interface that the Framework's Agent expects of any object that wishes to "plug in" as
+            an Windows Service Agent plugin.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgentPlugin.GetAgentPluginInfo">
+            <summary>
+            Returns information about the plugin
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgentPlugin.OnStartPlugin">
+            <summary>
+            Called when a plugin should start processing
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgentPlugin.OnStopPlugin">
+            <summary>
+            Called when a plugin should stop processing
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgentPlugin.OnSetPolicies(System.String)">
+            <summary>
+            Called by the agent when new plugin policies are received from the server
+            </summary>
+            <param name="strPolicies"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgentPlugin.PolicyId">
+            <summary>
+            The ID that corresponds to this plugin's policies.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.#ctor(Dell.Client.Framework.Agent.IAgent,System.String)">
+            <summary>
+            Initializes a new instance of the BaseAgentPlugin class
+            </summary>
+            <param name="agent">An interface to the Agent.</param>
+            <param name="logId">The subsystem ID to be used for logging.</param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.Dispose">
+            <summary>
+            Releases all resources used by the current instance.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.GetAgentPluginInfo">
+            <summary>
+            This method returns a class that reports back information about this plugin.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnSetPolicies(System.String)">
+            <summary>
+            This method is called when new plugin policies are to be applied
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnStartPlugin">
+            <summary>
+            This method is called by Framework to notify this plugin to start processing.
+            This is the point which we start the plugin's own thread.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnStopPlugin">
+            <summary>
+            This method is called by Framework to notify this plugin to stop processing.
+            We need to terminate the thread that we started and release any associated resources.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnThreadStart">
+            <summary>
+            This is the entry point for this plugins's thread.  It is called as a result of the
+            Framework service being started.  
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnThreadStop">
+            <summary>
+            This method is called when the Framework is stopping.  This method gives us a chance
+            to signal the manager's thread to stop processing.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.ArePoliciesEnforced">
+            <summary>
+            Optional virtual method allowing derived classes to report whether or not their policies
+            are enforced.  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.Dispose(System.Boolean)">
+            <summary>
+            This method allows derived classes to also dispose of IDisposable objects.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.GetPluginState">
+            <summary>
+            This virtual method returns a string that describes the plugin's state.  This base class always returns
+            the localized value for "Active", but derived classes may override this method to return a different value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.IsPluginEnabled">
+            <summary>
+            This virtual method returns a value indicating whether or not the plugin is enabled.  This base class always
+            returns true, but derived classes may override this method to return a different value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnNewPolicies(System.String)">
+            <summary>
+            This method is called when a new policy is received for the plugin.  If derived classes have policies, they may
+            override this method and process the serialized policy value.
+            </summary>
+            <param name="strPolicies"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnPluginProcess">
+            <summary>
+            This method is called when the plugin should perform its may processing.  It will be called by the 
+            classes thread after it wakes up.  After this method returns, the thread will sleep for the amount of 
+            time in <see cref="P:Dell.Client.Framework.Agent.BaseAgentPlugin.ThreadSleepTime"/>.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnPluginSleep(System.Int32)">
+            <summary>
+            This method handles the sleeping of the thread.  It will go to sleep for the amount of time in 
+            <see cref="P:Dell.Client.Framework.Agent.BaseAgentPlugin.ThreadSleepTime"/> unless the <see cref="P:Dell.Client.Framework.Agent.BaseAgentPlugin.WakeUpEvent"/> is set.  Derived classes may override
+            this method to perform their own thread sleep functionality.
+            </summary>
+            <param name="sleepTime"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnPluginStopping">
+            <summary>
+            This virtual method is called to notify the derived class that the plugin is being stopped by the Agent.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.OnPluginStarting">
+            <summary>
+            This virtual method is called to notify the derived class that the plugin is being started by the Agent.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.WakeupPlugin">
+            <summary>
+            This virtual method is called to nofify the derived class that the plugin thread is going to awaken.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.BaseAgentPlugin.SaveStateData(System.Object)">
+            <summary>
+            This method saves the state data by calling the plugin manager's secure data store method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.PolicyId">
+            <summary>
+            This virtual property allows a derived class to specify the policy identifier this plugin processes.  By default
+            an empty string is returned which indicates no policy processing is done by the class.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.WakeUpEvent">
+            <summary>
+            Gets or sets the wakeup event.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.SyncObject">
+            <summary>
+            Gets or sets the synchronization object that is used to control threaded access to shared data.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.Agent">
+            <summary>
+            Gets or sets the interface to the Agent.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.Log">
+            <summary>
+            Gets or sets the logging object that can be used by derived classes to generate log messages.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.BaseAgentPlugin.ThreadSleepTime">
+            <summary>
+            Gets or sets the amount of time the thread will sleep.  A value of -1 means to sleep infinitely.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.IReceivesPluginMessages">
+            <summary>
+            This interface defines the methods that support receiving plugin messages.  If an agent plugin wishes to receive 
+            generic plugin messages, it must derive from this interface.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IReceivesPluginMessages.OnAgentPluginMessage(System.Int32,System.Object)">
+            <summary>
+            This method implements a handler so that Agent plugins can receive notifications from external sources
+            such as a system tray application plugin.
+            </summary>
+            <param name="msg"></param>
+            <param name="o1"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.IReceivesUserProcessRequests">
+            <summary>
+            This interface defines the methods to support receiving messages from a UserProcess
+            plugin.  If an agent plugin wishes to receive responses back from a User Proces plugin,
+            it must derive from this interface.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IReceivesUserProcessRequests.OnUserProcessRequestComplete(System.Int32,System.Object)">
+            <summary>
+            This method is called when a UserProcess request is completed.
+            </summary>
+            <param name="request"></param>
+            <param name="parm1"></param>
+            <remarks>
+            If a plugin sends a message to a UserProcess plugin and wishes to receive messages back from that user process plugin,
+            then it must implement this method.
+            </remarks>
+        </member>
+        <member name="T:Dell.Client.Framework.Agent.IAgent">
+            <summary>
+            This defines the interface that the Framework Agent supplies to agent plugins.  
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.CreateLog(System.String)">
+            <summary>
+            This creates a log object given the subsystem ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.DisplayToasterMsg(Dell.Client.Framework.Agent.IAgentPlugin,Dell.Client.Framework.Common.ToasterMsgRequest)">
+            <summary>
+            This method displays a toaster message in the currently logged on user's desktop.
+            </summary>
+            <param name="plugin">The plugin interface to receive the result of the toaster message.</param>
+            <param name="toasterInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.DynamicValueGet(System.String)">
+            <summary>
+            This method allows a plugin to get a value from the Agent's dynamic dictionary.  The specified
+            key must exist on 0 will be returned.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.DynamicValueGet(System.String,System.Type)">
+            <summary>
+            This method allows a plugin to get a value from the Agent's dynamic dictionary.  The specified
+            key must exist or else 0 or null will be returned.
+            </summary>
+            <param name="key"></param>
+            <param name="objType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.DynamicValueSet(System.String,System.Object)">
+            <summary>
+            This method allows a plugin to set a valule in the Agent's dynamic dictionary.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.FindPluginByGuid(System.Guid)">
+            <summary>
+            Find an agent plugin by its unique identifer or return null if not found.
+            </summary>
+            <remarks>
+            <para>
+            This agent method will return an interface to a loaded plugin whose identifier
+            is the same as the one specified in guid.  If the plugin is
+            not found, null is returned.  
+            </para>
+            <para>
+            Since the agent only knows of IAgentPlugin interfaces, it is good practice to 
+            validate that the interface you get back is what you expected.
+            </para>
+            </remarks>
+            <example>
+            <code>
+            IAgentPlugin plugin = Agent.FindPluginByGuid(SecurityAgentConsts.AgentGuid);
+            if (plugin != null &amp;&amp; plugin is IAgentPluginSecurityManager)
+                ((IAgentPluginSecurityManager)plugin).OnEncryptionInfoChanged();
+            </code>
+            </example>
+            <param name="guid">Identifier of the requested plugin interface.</param>
+            <returns>An interface to the agent plugin whose Guid matches the requested Guid or null if no
+            plugin was found.</returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.FindPluginById(System.String)">
+            <summary>
+            Find an agent plugin by its unique identifer or return null if not found.
+            </summary>
+            <remarks>
+            <para>
+            This agent method will return an interface to a loaded plugin whose identifier
+            is the same as the one specified in Id.  If the plugin is
+            not found, null is returned.  
+            </para>
+            <para>
+            Since the agent only knows of IAgentPlugin interfaces, it is good practice to 
+            validate that the interface you get back is what you expected.
+            </para>
+            </remarks>
+            <example>
+            <code>
+            IAgentPlugin plugin = Agent.FindPluginById("{6E319657-5B8D-48D4-9D3A-B430C0B5B974}");
+            if (plugin != null &amp;&amp; plugin is IAgentPluginSecurityManager)
+                ((IAgentPluginSecurityManager)plugin).OnEncryptionInfoChanged();
+            </code>
+            </example>
+            <param name="id">Identifier of the requested plugin interface.</param>
+            <returns>An interface to the agent plugin whose Id matches the requested Id or null if no
+            plugin was found.</returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.FindPluginByType(System.Type)">
+            <summary>
+            Finds the first agent plugin of a given type or return null if not found.  
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+            <remarks>
+            This agent method will return an interface to a loaded plugin who is 
+            compatible with the given type, i.e whose's object "is" of the given type.
+            If no object is found, null is returned.
+            <br/><br/>
+            This method is useful if there is only one possible type of a given plugin
+            loaded.  If there are multiple plugins that could be of the specified <paramref name="interfaceType"/>, 
+            you should use the <see cref="M:Dell.Client.Framework.Agent.IAgent.FindPluginsByType(System.Type)"/> method.
+            <br/><br/>
+            If this method returns a non-null value indicating that an object was found, the
+            object returned has already be validated to be of the specified type, so you 
+            may safely cast the return to that object type.
+            </remarks>
+            <example>
+            <code>
+            commManager = (IAgentPluginCommManager)Agent.FindPluginByType(typeof(IAgentPluginCommManager));
+            if (commManager == null)
+                return ErrNoCommPluginFound;
+            </code>
+            </example>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.FindPluginsByType(System.Type)">
+            <summary>
+            Finds the all the agent plugins of a given type and returns them in a list.  If none are found,
+            the list will contain zero elements.
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+            <remarks>
+            This agent method will return a list of loaded plugins who are compatible with the 
+            given type, i.e whose's object "is" of the given type.  If no objects are found, the list will 
+            contain no elements.
+            <br/><br/>
+            Each object returned in the list has already been validated to be of the requested type, so you 
+            may safely cast the return to that object type.
+            </remarks>
+            <example>
+            <code>
+            List&lt;IAgentPlugin&gt; Plugins = Agent.FindPluginsByType(typeof(IAgentPluginEncryptionManager));
+            foreach (IAgentPlugin plugin in Plugins)
+                ((IAgentPluginEncryptionManager)plugin).SetEncryptionInfo(disks);
+            </code>
+            </example>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetPluginInformation">
+            <summary>
+            Returns an array of information about each Agent plugin that is currently loaded in the system.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetPolicyInformation">
+            <summary>
+            This method returns a serialized representation of the policies.  The sender must be allowed to receive
+            the policies or this method will return an empty string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetPolicySequenceNumber">
+            <summary>
+            This method returns the current policy sequence number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetRegKeyBoolean(System.String)">
+            <summary>
+            Helper function to return a boolean value from the registry
+            </summary>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetRegKeyInt(System.String)">
+            <summary>
+            Helper function to return a integer value from the registry
+            </summary>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.GetRegKeyString(System.String)">
+            <summary>
+            Helper function to return a string value from the registry
+            </summary>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.IsRebootDialogActive">
+            <summary>
+            Returns a booledan indicating whether or not the Reboot/Shutdown dialog is active.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.NotifyPluginStateChanged">
+            <summary>
+            This method is called by a plugin when it's state has changed.  The agent will query the state
+            of all plugins and raise an event.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.RaiseEvent(System.String,System.Object,Dell.Client.Framework.Common.EventManagerArgs)">
+            <summary>
+            This method causes an event to be raised.  All subscribers to the specified eventName wil
+            be signaled.
+            </summary>
+            <param name="eventName">A string containing the name of the event.  It is recommended that these names be Guid.ToString() values.</param>
+            <param name="sender">The object raising the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.RegisterForEvent(System.String,Dell.Client.Framework.Common.EventManagerHandler)">
+            <summary>
+            This method allows an Agent plugin to register for events that is wants to subscribe to.
+            The event is specified by name.  
+            </summary>
+            <param name="eventName">A string containing the name of the event.  It is recommended that these names be Guid.ToString() values.</param>
+            <param name="handler">Specifies a handler to call when the event is raised.</param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.RequestCancelReboot">
+            <summary>
+            This method is called by a plugin wants to cancel the Reboot/Shutdown dialog.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.RequestSystemRestart(System.String)">
+            <summary>
+            This method is called by a plugin when the system needs to be restarted.
+            </summary>
+            <param name="prompt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.RequestSystemShutdown(System.String)">
+            <summary>
+            This method is called by a plugin when the system needs to be shutdown
+            </summary>
+            <param name="prompt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SecureDataDelete(Dell.Client.Framework.Common.Log,System.String)">
+            <summary>
+            This method is provided by the agent to allow a plugin to securely load an object.
+            </summary>
+            <param name="log"></param>
+            <param name="identifier"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SecureDataLoad(Dell.Client.Framework.Common.Log,System.Type,System.String)">
+            <summary>
+            This method is provided by the agent to allow a plugin to securely load an object.
+            </summary>
+            <param name="log"></param>
+            <param name="t"></param>
+            <param name="identifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SecureDataSave(Dell.Client.Framework.Common.Log,System.Object,System.String)">
+            <summary>
+            This method is provided by the agent to allow a plugin to securely save an object.
+            </summary>
+            <param name="log"></param>
+            <param name="o"></param>
+            <param name="identifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SecureFileLoad(Dell.Client.Framework.Common.Log,System.Type,System.String)">
+            <summary>
+            This method is provided by the agent to allow a plugin to securely load a file.
+            </summary>
+            <param name="logFile"></param>
+            <param name="t"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SecureFileSave(Dell.Client.Framework.Common.Log,System.Object,System.String)">
+            <summary>
+            This method is provided by the agent to write data securely for a plugin.
+            </summary>
+            <param name="logFile"></param>
+            <param name="o"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SendAgentPluginMessage(System.Guid,System.Int32,System.Object)">
+            <summary>
+            This method sends a message to an Agent plugin as specified by the pluginGuid.
+            </summary>
+            <param name="pluginGuid"></param>
+            <param name="msg"></param>
+            <param name="o1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SendUserProcessRequest(Dell.Client.Framework.UserProcess.UserProcessRequest,Dell.Client.Framework.UserProcess.UserProcessRequestData)">
+            <summary>
+            This method sends a request to the UserProcess.  If this process is not currently
+            running, the Agent will start it up.
+            </summary>
+            <param name="request"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Agent.IAgent.SetPolicies(Dell.Client.Framework.Agent.IAgentPlugin,Dell.Client.Framework.Common.AgentPolicies)">
+            <summary>
+            This method sets new policies for all the plugins.  
+            </summary>
+            <param name="plugin"></param>
+            <param name="policies"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.AgentAssemblyBuildDate">
+            <summary>
+            Returns the agent assembly's build date.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.AgentAssemblyFileVersion">
+            <summary>
+            Returns the agent assembly's file version.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.AgentDataDirectory">
+            <summary>
+            Returns the agent's data directory path.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.OsType">
+            <summary>
+            Returns the type of operating system
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.ProductName">
+            <summary>
+            Returns the product name
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.ProductVersion">
+            <summary>
+            Returns the product version
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.RegKeyAgentParam">
+            <summary>
+            Returns the base registry key that is used by Agent plugins for storing information in the registry.  This 
+            typically points to "HKLM\\System\\CurrentControlSet\\Services\\{ServiceName}\\Parameters".  Note that when 
+            the framework is uninstalled for the system, this registry key is deleted and all data will be removed.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.RegKeyAppProduct">
+            <summary>
+            Returns the base registry key that points to the Product's application hive.  This typically points
+            to "HKLM\\Software\\Dell\\{ProductName}".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Dell.Client.Framework.Agent.IAgent.ServiceName">
+            <summary>
+            Returns the name of the Window service for this Agent.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.UserProcess.UserProcessRequest">
+            <summary>
+            This enumeration defines the request types that can be sent to the User Process.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequest.Ping">
+            <summary>
+            Ping the user process plugin
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequest.RunApp">
+            <summary>
+            Run an application in the user's desktop.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequest.PluginSyncMsg">
+            <summary>
+            Send a synchronous message to a user process plugin.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequest.PluginAsyncMsg">
+            <summary>
+            Send an asynchronous message to a user process plugin.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.UserProcess.IUserProcess">
+            <summary>
+            This defines the interface that the Framework User Process supplies to UserProcessPlugins.  
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.CreateLog(System.String)">
+            <summary>
+            This creates a log object given the subsystem ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.FindPluginByGuid(System.Guid)">
+            <summary>
+            Find a plugin by its unique identifer or return null if not found.
+            </summary>
+            <remarks>
+            <para>
+            This method will return an interface to a loaded plugin whose identifier
+            is the same as the one specified in guid.  If the plugin is
+            not found, null is returned.  
+            </para>
+            <para>
+            Since the Framework only knows of IFrameworkPlugin interfaces, it is good practice to 
+            validate that the interface you get back is what you expected.
+            </para>
+            </remarks>
+            <param name="guid">Identifier of the requested plugin interface.</param>
+            <returns>An interface to the plugin whose Guid matches the requested Guid or null if no
+            plugin was found.</returns>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.FindPluginById(System.String)">
+            <summary>
+            Find a plugin by its unique identifer or return null if not found.
+            </summary>
+            <remarks>
+            <para>
+            This method will return an interface to a loaded plugin whose identifier
+            is the same as the one specified in Id.  If the plugin is not found, null is returned.  
+            </para>
+            <para>
+            Since the Framework only knows of IFrameworkPlugin interfaces, it is good practice to 
+            validate that the interface you get back is what you expected.
+            </para>
+            </remarks>
+            <param name="id">Identifier of the requested plugin interface.</param>
+            <returns>An interface to the plugin whose Id matches the requested Id or null if no
+            plugin was found.</returns>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.FindPluginByType(System.Type)">
+            <summary>
+            Finds the first plugin of a given type or return null if not found.  
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.FindPluginsByType(System.Type)">
+            <summary>
+            Finds the all the plugins of a given type and returns them in a list.  If none are found,
+            the list will contain zero elements.
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.RaiseEvent(System.String,System.Object,Dell.Client.Framework.Common.EventManagerArgs)">
+            <summary>
+            This method causes an event to be raised.  All subscribers to the specified eventName wil
+            be signaled.
+            </summary>
+            <param name="eventName"></param>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcess.RegisterForEvent(System.String,Dell.Client.Framework.Common.EventManagerHandler)">
+            <summary>
+            This method allows a plugin to register for events that is wants to subscribe to.
+            The event is specified by name.  
+            </summary>
+            <param name="eventName"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.UserProcess.IUserProcess.ProductName">
+            <summary>
+            Returns the product name
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.UserProcess.IUserProcessPlugin">
+            <summary>
+            This interface defines the methods that an UserProcessPlugin must implement in 
+            order to be loaded by the Framework's UserProcess.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.IUserProcessPlugin.OnAgentRequestReceived(System.Int32,System.Object,System.Object)">
+            <summary>
+            Process a request sent from the Agent or an Agent plugin.  The API provides for a request code, and two 
+            optional parameters.
+            </summary>
+            <param name="request"></param>
+            <param name="param1"></param>
+            <param name="param2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.UserProcess.UserProcessRequestData">
+            <summary>
+            This class defines the request data that is sent from the Agent or an Agent plugin to the UserProcess.  
+            </summary>
+            <remarks>
+            This class contains the appropriate information to route the message to the User Process plugin and return
+            the result back to the calling Agent plugin.
+            </remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequestData.Msg">
+            <summary>
+            Message identifier for the user process plugin.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequestData.Param1">
+            <summary>
+            Optional parameter for the user process plugin.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequestData.Param2">
+            <summary>
+            Optional parameter for the user process plugin.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequestData.UserProcessPluginId">
+            <summary>
+            Identifier of the user process plugin that will receive this message.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.UserProcess.UserProcessRequestData.AgentPluginId">
+            <summary>
+            Identifier of the Agent plugin that will receive the result of this message.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.UserProcessRequestData.#ctor">
+            <summary>
+            Initialize the object in default state.  Required for XML serialization.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.UserProcessRequestData.#ctor(System.Guid,System.Int32)">
+            <summary>
+            Initialize the object with a target user process plugin identifier and a message.
+            </summary>
+            <param name="userProcessPluginId"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.UserProcessRequestData.#ctor(System.Guid,System.Int32,System.Object)">
+            <summary>
+            Initialize the object with a target user process plugin identifier, a message, and one optional parameter.
+            </summary>
+            <param name="userProcessPluginId"></param>
+            <param name="msg"></param>
+            <param name="param1"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.UserProcessRequestData.#ctor(System.Guid,System.Int32,System.Object,System.Object)">
+            <summary>
+            Initialize the object with a target user process plugin identifier, a message, and two optional parameters.
+            </summary>
+            <param name="userProcessPluginId"></param>
+            <param name="msg"></param>
+            <param name="param1"></param>
+            <param name="param2"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.UserProcess.UserProcessRequestData.#ctor(System.Guid,System.Int32,System.Object,System.Object,System.Guid)">
+            <summary>
+            Initialize the object with a target user process plugin identifier, a message, two optional parameters, 
+            and the identifier of the Agent plugin that will receive an asynchronous message back from the user process
+            plugin.
+            </summary>
+            <param name="userProcessPluginId"></param>
+            <param name="msg"></param>
+            <param name="param1"></param>
+            <param name="param2"></param>
+            <param name="agentPluginId"></param>
+        </member>
+    </members>
+</doc>

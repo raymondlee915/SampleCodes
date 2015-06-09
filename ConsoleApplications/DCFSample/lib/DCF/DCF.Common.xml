@@ -1,0 +1,2034 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DCF.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Dell.Client.Framework.Common.AgentInfo">
+            <summary>
+            This class provides static information about the Framework's Agent.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentInfo.GetAgentMutexId(System.String)">
+            <summary>
+            Returns the name of the mutex that can be used to determine if an Agent is running.  You must
+            supply the service name.
+            </summary>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentInfo.GetInfoServiceAddress(System.String)">
+            <summary>
+            Returns the name of the information service address for the Agent's WCF information service given
+            a service name.
+            </summary>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentInfo.GetLogServiceAddress(System.String)">
+            <summary>
+            Returns the name of the log service address that the Agent is using.  You must supply the appropriate
+            service name.
+            </summary>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentInfo.IsAgentRunning(System.String)">
+            <summary>
+            Returns a boolean indicating if the Agent is currently running on the machine.
+            </summary>
+            <remarks>
+            This static method is provided for anyone who might want to insure that the Agent is running before
+            calling an Agent function.  Under normal situations, the Agent is always running as a service so this
+            method would normally always return true.
+            </remarks>
+            <example>
+            <code>
+            if (AgentInfo.IsAgentRunning())
+                // call the agent to do something
+            </code>
+            </example>
+            <returns>Returns true if the agent is running, or false if it is not.
+            </returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginPolicy.#ctor">
+            <summary>
+            Default constructor required for XmlSerializer
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginPolicy.#ctor(System.String,System.String)">
+            <summary>
+            Initialize the class with the specified identifier and data
+            </summary>
+            <param name="id"></param>
+            <param name="data"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.AgentPolicies">
+            <summary>
+            This object defines the Agent's policies.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AgentPolicies.RebootPolicy">
+            <summary>
+            Specifies the password to use when taking ownership.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AgentPolicies.PluginPolicies">
+            <summary>
+            Plugin policies
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentPolicies.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPolicies.Sequence">
+            <summary>
+            The current sequence number of this policy.
+            </summary>
+            <remarks>
+            A value of -1 indicates no policy.  CMG Server will increment this value everytime it sends
+            a new policy.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.BaseThread.OnThreadEntry">
+            <summary>
+            This is the entry point of the thread.  It gets called when the thread first starts.  This 
+            class sets a exception handler for any unhandled exception and then calls the virtual 
+            method so that derived classes can start processing.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.BaseThread.SetThreadName">
+            <summary>
+            This private method sets the name of the thread.  This is used for debugging purposes.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.BaseThread.ThreadName">
+            <summary>
+            This property gets or sets the thread name.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AppHelper.GetAppGuid">
+            <summary>
+            Returns the GUID of the application assembly.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AppHelper.IsRunAsAdmin">
+            <summary>
+            Returns true if the current process is running as an administrator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AppHelper.RunUserProcessAsAdmin(System.String,System.String)">
+            <summary>
+            Starts a process in the currently logged on user's desktop and bypasses UAC
+            </summary>
+            <param name="filePath"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AppHelper.BringAppToFront(System.String)">
+            <summary>
+            Finds an application by window title and makes it the foreground window.  It will 
+            restore a previously minimized window.
+            </summary>
+            <param name="title"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AppHelper.BringAppToFront(System.IntPtr)">
+            <summary>
+            Finds an application by window handle and makes it the foreground window.  It will 
+            restore a previously minimized window.
+            </summary>
+            <param name="hWnd"></param>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.AsynchronousWindowPosition">
+            <summary>If the calling thread and the thread that owns the window are attached to different input queues, 
+            the system posts the request to the thread that owns the window. This prevents the calling thread from 
+            blocking its execution while other threads process the request.</summary>
+            <remarks>SWP_ASYNCWINDOWPOS</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DeferErase">
+            <summary>Prevents generation of the WM_SYNCPAINT message.</summary>
+            <remarks>SWP_DEFERERASE</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DrawFrame">
+            <summary>Draws a frame (defined in the window's class description) around the window.</summary>
+            <remarks>SWP_DRAWFRAME</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.FrameChanged">
+            <summary>Applies new frame styles set using the SetWindowLong function. Sends a WM_NCCALCSIZE message to 
+            the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE 
+            is sent only when the window's size is being changed.</summary>
+            <remarks>SWP_FRAMECHANGED</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.HideWindow">
+            <summary>Hides the window.</summary>
+            <remarks>SWP_HIDEWINDOW</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotActivate">
+            <summary>Does not activate the window. If this flag is not set, the window is activated and moved to the 
+            top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter 
+            parameter).</summary>
+            <remarks>SWP_NOACTIVATE</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotCopyBits">
+            <summary>Discards the entire contents of the client area. If this flag is not specified, the valid 
+            contents of the client area are saved and copied back into the client area after the window is sized or 
+            repositioned.</summary>
+            <remarks>SWP_NOCOPYBITS</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.IgnoreMove">
+            <summary>Retains the current position (ignores X and Y parameters).</summary>
+            <remarks>SWP_NOMOVE</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotChangeOwnerZOrder">
+            <summary>Does not change the owner window's position in the Z order.</summary>
+            <remarks>SWP_NOOWNERZORDER</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotRedraw">
+            <summary>Does not redraw changes. If this flag is set, no repainting of any kind occurs. This applies to 
+            the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent 
+            window uncovered as a result of the window being moved. When this flag is set, the application must 
+            explicitly invalidate or redraw any parts of the window and parent window that need redrawing.</summary>
+            <remarks>SWP_NOREDRAW</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotReposition">
+            <summary>Same as the SWP_NOOWNERZORDER flag.</summary>
+            <remarks>SWP_NOREPOSITION</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.DoNotSendChangingEvent">
+            <summary>Prevents the window from receiving the WM_WINDOWPOSCHANGING message.</summary>
+            <remarks>SWP_NOSENDCHANGING</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.IgnoreResize">
+            <summary>Retains the current size (ignores the cx and cy parameters).</summary>
+            <remarks>SWP_NOSIZE</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.IgnoreZOrder">
+            <summary>Retains the current Z order (ignores the hWndInsertAfter parameter).</summary>
+            <remarks>SWP_NOZORDER</remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.AppHelper.SetWindowPosFlags.ShowWindow">
+            <summary>Displays the window.</summary>
+            <remarks>SWP_SHOWWINDOW</remarks>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.AgentPluginInfo">
+            <summary>
+            This object defines all the reporting information about an Agent "plugin", such as the Bitlocker or TPM plugins.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.AgentPluginInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginName">
+            <summary>
+            The name of the plugin - e.g. "BitLocker Management Provider"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginGuid">
+            <summary>
+            The unique ID that identifies this plugin
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginVersion">
+            <summary>
+            The version of the plugin - e.g. "1.0.3"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginApiVersion">
+            <summary>
+            The version of the interface - e.g. "1.0"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginDescription">
+            <summary>
+            This description of the plugin
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginEnabled">
+            <summary>
+            This value indicates whether the plugin has been enabled by policy.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PluginState">
+            <summary>
+            This is a plugin-specific value that indicates the state of the plugin.
+            </summary>
+            <remarks>
+            Currently, this string value is specific to each plugin and will be in the locale of the client machine.
+            </remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.AgentPluginInfo.PoliciesEnforced">
+            <summary>
+            This value indicates whether the plugin has determined that all of its current policies are in force.
+            </summary>
+            <remarks>
+            For the machine-level PoliciesEnforced value to be true, all plugins must also report that policies are enforced.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WinSafer.SaferCreateLevel(Dell.Client.Framework.Common.WinSafer.SaferLevelScope,Dell.Client.Framework.Common.WinSafer.SaferLevel,Dell.Client.Framework.Common.WinSafer.SaferOpen,System.IntPtr@,System.IntPtr)">
+            <summary>
+            The SaferCreateLevel function opens a SAFER_LEVEL_HANDLE.
+            </summary>
+            <param name="scopeId">The scope of the level to be created.</param>
+            <param name="levelId">The level of the handle to be opened.</param>
+            <param name="openFlags">Must be SaferOpenFlags.Open</param>
+            <param name="levelHandle">The returned SAFER_LEVEL_HANDLE. When you have finished using the handle, release it by calling the SaferCloseLevel function.</param>
+            <param name="reserved">This parameter is reserved for future use. IntPtr.Zero</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WinSafer.SaferComputeTokenFromLevel(System.IntPtr,System.IntPtr,System.IntPtr@,Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour,System.IntPtr)">
+            <summary>
+            The SaferComputeTokenFromLevel function restricts a token using restrictions specified by a SAFER_LEVEL_HANDLE.
+            </summary>
+            <param name="levelHandle">SAFER_LEVEL_HANDLE that contains the restrictions to place on the input token. Do not pass handles with a LevelId of SAFER_LEVELID_FULLYTRUSTED or SAFER_LEVELID_DISALLOWED to this function. This is because SAFER_LEVELID_FULLYTRUSTED is unrestricted and SAFER_LEVELID_DISALLOWED does not contain a token.</param>
+            <param name="inAccessToken">Token to be restricted. If this parameter is NULL, the token of the current thread will be used. If the current thread does not contain a token, the token of the current process is used.</param>
+            <param name="outAccessToken">The resulting restricted token.</param>
+            <param name="flags">Specifies the behavior of the method.</param>
+            <param name="lpReserved">Reserved for future use. This parameter should be set to IntPtr.EmptyParam.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WinSafer.SaferCloseLevel(System.IntPtr)">
+            <summary>
+            The SaferCloseLevel function closes a SAFER_LEVEL_HANDLE that was opened by using the SaferIdentifyLevel function or the SaferCreateLevel function.</summary>
+            <param name="levelHandle">The SAFER_LEVEL_HANDLE to be closed.</param>
+            <returns>TRUE if the function succeeds; otherwise, FALSE. For extended error information, call GetLastWin32Error.</returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour">
+            <summary>
+            Specifies the behaviour of the SaferComputeTokenFromLevel method
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour.Default">
+            <summary></summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour.NullIfEqual">
+            <summary>If the OutAccessToken parameter is not more restrictive than the InAccessToken parameter, the OutAccessToken parameter returns NULL.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour.CompareOnly">
+            <summary></summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour.MakeInert">
+            <summary></summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferTokenBehaviour.WantFlags">
+            <summary></summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.WinSafer.SaferLevel">
+            <summary>
+            The level of the handle to be opened.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevel.Disallowed">
+            <summary>Software will not run, regardless of the user rights of the user.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevel.Untrusted">
+            <summary>Allows programs to execute with access only to resources granted to open well-known groups, blocking access to Administrator and Power User privileges and personally granted rights.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevel.Constrained">
+            <summary>Software cannot access certain resources, such as cryptographic keys and credentials, regardless of the user rights of the user.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevel.NormalUser">
+            <summary>Allows programs to execute as a user that does not have Administrator or Power User user rights. Software can access resources accessible by normal users.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevel.FullyTrusted">
+            <summary>Software user rights are determined by the user rights of the user.</summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.WinSafer.SaferLevelScope">
+            <summary>
+            The scope of the level to be created.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevelScope.Machine">
+            <summary>The created level is scoped by computer.</summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.WinSafer.SaferLevelScope.User">
+            <summary>The created level is scoped by user.</summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo">
+            <summary>
+            This object contains information about a machine's motherboard or system board.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_BaseBoard WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo.Refresh(Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo@,System.String)">
+            <summary>
+            Refresh the given WMI object if necessary.
+            </summary>
+            <param name="info"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo.Manufacturer">
+            <summary>
+            The name of the organization responsible for manufacturing the motherboard - e.g. "Dell Inc."
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBaseBoardInfo.SerialNumber">
+            <summary>
+            The manufacturer-allocated number used to identify the motherboard - e.g. ".B7F3BK1.CN129619E2335".
+            </summary>
+            <remarks>
+            It has been determined that the use of the motherboard serial number works best for uniquely identifying
+            a machine.
+            </remarks>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiBiosInfo">
+            <summary>
+            This object contains information about a machine's BIOS.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_BIOS WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.Refresh(Dell.Client.Framework.Common.Discovery.WmiBiosInfo@,System.String)">
+            <summary>
+            Refresh the given WMI object if necessary.
+            </summary>
+            <param name="info"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.Name">
+            <summary>
+            Name of the BIOS - e.g. "Phoenix ROM BIOS PLUS Version 1.10 A24"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.Manufacturer">
+            <summary>
+            The manufacturer of the BIOS - e.g. "Dell Inc."
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.SerialNumber">
+            <summary>
+            The serial number of the BIOS - e.g. "B7F3BK1".
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.Version">
+            <summary>
+            The version of the BIOS - e.g. "DELL - 27da0813"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiBiosInfo.SMBiosVersion">
+            <summary>
+            The BIOS version as reported by SMBIOS - e.g. "2.4"
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.DiskDriveMediaType">
+            <summary>
+            This enumeration specifies drive's media type.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.DiskDriveMediaType.Unknown">
+            <summary>
+            The media type is unknown.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.DiskDriveMediaType.Fixed">
+            <summary>
+            The media is fixed.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.DiskDriveMediaType.Removable">
+            <summary>
+            The media is removable.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.DiskDriveMediaType.External">
+            <summary>
+            The media is external.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo">
+            <summary>
+            This object contains information about a disk drive.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_DiskDrive WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.ResetEncryptionInfo">
+            <summary>
+            This method resets all of the encryption information for a given drive.
+            </summary>
+            <example>
+            After calling this function, this drive and all its partitions will have newly constructed
+            encryption information objects.
+            </example>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.GetDiskDriveFromLogicalDisk(System.String,System.String)">
+            <summary>
+            Given a computerName and logical disk (i.ex. "C:") return a DiskDriveInfo.
+            </summary>
+            <param name="computerName"></param>
+            <param name="diskID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.GetMediaType(System.Management.ManagementBaseObject)">
+            <summary>
+            This helper function returns an enumeration that helps us categorize the 
+            media type from the MediaType string that we receive from the WMI object.
+            If desired, we could move this function into the WmiDiskDriveInfo class 
+            and always keep the enumeration in here.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.GetSerialNumber(System.Management.ManagementBaseObject,Dell.Client.Framework.Common.Discovery.DiskDriveMediaType)">
+            <summary>
+            This method determines a unique serial number from the given WMI object.  In the case of removable
+            media, the SerialNumber property is not valid.  So we parse the end of the PNPDeviceID to get what
+            we hope is a unique ID.  
+            The PNPDeviceID looks something like:
+                    USBSTOR\DISK.VEN_MEMOREX.PROD_MINI_TRAVELDRIVE.REV_6.17\0BE1B56160E19880.0
+            We extract everything past the last '\' and use that for a unique ID.       
+            </summary>
+            <param name="m"></param>
+            <param name="mediaType"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.UniqueID">
+            <summary>
+            A value that may be used to uniquely identify the disk drive on the system.
+            </summary>
+            <remarks>
+            This value is the same as the serial number if no Model is detected, otherwise it consists of a 
+            concatenated model and serial number.
+            </remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.DeviceID">
+            <summary>
+            Operating system identifier of the disk drive with other devices on the system.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.DiskIndex">
+            <summary>
+            Physical drive number of the given drive. A value of -1 indicates that the given drive does not map to a physical drive.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.Size">
+            <summary>
+            Size of the disk drive. It is calculated by multiplying the total number of cylinders, tracks in each cylinder, sectors in each track, and bytes in each sector.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.Model">
+            <summary>
+            Manufacturer's model number of the disk drive. Example: "ST32171W"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.SerialNumber">
+            <summary>
+            Number allocated by the manufacturer to identify the physical media. Example: "WD-WM3493798728".
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.MediaType">
+            <summary>
+            Specifies the type of media for the disk drive.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.InterfaceType">
+            <summary>
+            Specifies an interface type for the disk drive - e.g. ("USB")
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.EncryptionInfo">
+            <summary>
+            Specifies the disk drive's encryption information.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskDriveInfo.DiskPartitions">
+            <summary>
+            Contains an array of <see cref="T:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo"/> object - one for each partition that is allocated on the disk drive.
+            </summary>
+            <seealso cref="T:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo"/>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo">
+            <summary>
+            This object contains information about a disk partition.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_DiskPartition WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.ResetEncryptionInfo">
+            <summary>
+            This method resets all of the encryption information for a given partition.
+            </summary>
+            <example>
+            After calling this function, this partition and all its logical drives will have newly constructed encryption information objects.
+            </example>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.PartitionID">
+            <summary>
+            Unique identifier of the disk drive and partition, from the rest of the operating system.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.PartitionIndex">
+            <summary>
+            Index number of the partition.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.PartitionSize">
+            <summary>
+            Total size of the partition in bytes.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.DiskIndex">
+            <summary>
+            Index of the disk containing this partition.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.EncryptionInfo">
+            <summary>
+            Encryption information associated with this partition.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo.LogicalDisks">
+            <summary>
+            List of logical disks defined in this partition.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo">
+            <summary>
+            This class contains information about a encryption vendor (for example "Bitlocker") at a given encryptable unit (disk drive, partition, volume).
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.ID">
+            <summary>
+            Contains the enumerated ID of the vendor - e.g. Bitlocker
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.Technology">
+            <summary>
+            Contains the enumerated ID of the vendor - e.g. Bitlocker
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.UniqueID">
+            <summary>
+            Contains any unique ID that the vendor may provide for the given encryptable unit.  This value may be an empty string if
+            the vendor does not supply a unique identifier.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.ProtectionStatus">
+            <summary>
+            Contains the protection status of the encryptable unit.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.ConversionStatus">
+            <summary>
+            Contains the encryption conversion status of the encryptable unit.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.Algorithm">
+            <summary>
+            Contains the encryption algorithm of the encryptable unit.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.EncryptionPercentage">
+            <summary>
+            Contains the encryption percentage of the encryptable unit from 0.0 to 100.0.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorID">
+            <summary>
+            This enumeration specifies a specific vendor ID that CMG Server utilizes.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorID.Unknown">
+            <summary>
+            The encryption vendor is unknown.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorID.BitLocker">
+            <summary>
+            The encryption vendor is Microsoft's BitLocker
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorID.CredantSED">
+            <summary>
+            The encryption vendor is Credant's SED manager
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorID.DDPE">
+            <summary>
+            The encryption vendor is DDPE
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology">
+            <summary>
+            Defines the various types of encryption techologies
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology.Unknown">
+            <summary>
+            The technology is unknown or at default state.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology.SelfEncryptingDrive">
+            <summary>
+            The technology is a self-encrypting drive 
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology.VolumeEncryption">
+            <summary>
+            The technology is a volume-based encryption, such as BitLocker.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology.FileFolderEncryption">
+            <summary>
+            The technology is a file/folder-based encryption, such as CMG Shield or EFS
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo.VendorTechnology.FullDiskEncryption">
+            <summary>
+            The technology is a full-disk encryption technology, such as FVE with GPE
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo">
+            <summary>
+            This object contains information about a logical disk (volume).  There may be multiple logical disks in a <see cref="T:Dell.Client.Framework.Common.Discovery.WmiDiskPartitionInfo"/> object.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_LogicalDisk WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.ResetEncryptionInfo">
+            <summary>
+            This method resets the encryption information for this logical disk.
+            </summary>
+            <example>
+            After calling this function, the encryption information will be at default state.
+            </example>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.DiskId">
+            <summary>
+            Unique identifier of the logical disk from other devices on the system - e.g. "C:"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.Name">
+            <summary>
+            Volume name of this logical disk or an empty string if none was specified by the user.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.Description">
+            <summary>
+            A description of this logical disk - e.g. "Local Fixed Disk"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.SerialNumber">
+            <summary>
+            A serial number of the logical disk - e.g. "A036C39B".
+            </summary>
+            <remarks>
+            Note that this serial is not guaranteed to be unique.
+            </remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.DriveType">
+            <summary>
+            The type of logical disk - e.g. "LocalDisk"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.MediaType">
+            <summary>
+            The type of media of the logical disk - e.g. "FixedMedia"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.FileSystem">
+            <summary>
+            The file system on the logical disk - e.g. "NTFS" or "FAT32", etc.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.TotalSpace">
+            <summary>
+            Total space, in bytes, allocated on the logical disk.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.FreeSpace">
+            <summary>
+            Space, in bytes, currently available (free) on the logical disk.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiLogicalDiskInfo.EncryptionInfo">
+            <summary>
+            Encryption information associated with this logical disk.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiMachineInfo">
+            <summary>
+            This object contains all inventory information about a given machine.  
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.osInfo">
+            <summary>
+            Contains inventory information about the operating system.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.biosInfo">
+            <summary>
+            Contains inventory information about the machine's BIOS.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.memoryInfo">
+            <summary>
+            Contains inventory information about the machine's memory configuration.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.tpmInfo">
+            <summary>
+            Contains inventory information about the machine's TPM device.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.baseBoardInfo">
+            <summary>
+            Contains inventory information about the machine's motherboard.  
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.processors">
+            <summary>
+            Contains inventory information about the machine's processors.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.diskDrives">
+            <summary>
+            Contains inventory information about the machine's disk drives.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.ProtectionStatus">
+            <summary>
+            Contains the machine-level encryption protection status which is a roll-up of all the disk drives' encryption protection status value.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.ProtectionStatusDateTime">
+            <summary>
+            Contains the date and time that the machine's <see cref="P:Dell.Client.Framework.Common.Discovery.WmiMachineInfo.ProtectionStatus"/> became protected.  This is used for auditing purposes.
+            </summary>
+            <remarks>
+            Note that this value contains the date/time that the machine was last protected, but does not guarantee that the machine
+            is protected.
+            </remarks>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo">
+            <summary>
+            This object contains information about a machine's memory configuration.
+            </summary>
+            <remarks>
+            This object provides a C# front-end to various properties in the Win32_OperatingSystem WMI class.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.Refresh(Dell.Client.Framework.Common.Discovery.WmiMemoryInfo@,System.String)">
+            <summary>
+            Refresh the given WMI object if necessary.
+            </summary>
+            <param name="info"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.TotalPhysicalMemory">
+            <summary>
+            Total amount, in kilobytes, of physical memory available to the operating system. This value does not 
+            necessarily indicate the true amount of physical memory, but what is reported to the operating system as available to it.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.AvailablePhysicalMemory">
+            <summary>
+            Number, in kilobytes, of physical memory currently unused and available.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.TotalVirtualMemory">
+            <summary>
+            Number, in kilobytes, of virtual memory. 
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiMemoryInfo.AvailableVirtualMemory">
+            <summary>
+            Number, in kilobytes, of virtual memory currently unused and available.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo">
+            <summary>
+            This object contains information about a operating system that is currently running on a machine.
+            </summary>
+            <remarks>
+            This object provides a C# front-end to various properties in the Win32_OperatingSystem WMI class.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.Refresh(Dell.Client.Framework.Common.Discovery.WmiOpSysInfo@,System.String)">
+            <summary>
+            Refresh the given WMI object if necessary.
+            </summary>
+            <param name="info"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.Name">
+            <summary>
+            Short description of the object—a one-line string. The string includes the operating system version. For example, "Microsoft Windows XP Professional Version = 5.1.2500". This property can be localized.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.Version">
+            <summary>
+            Version number of the operating system. Example: "4.0"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.Architecture">
+            <summary>
+            Architecture of the operating system, as opposed to the processor. Example: "32-bit"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.SerialNumber">
+            <summary>
+            Operating system product serial identification number. Example: "10497-OEM-0031416-71674
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.Organization">
+            <summary>
+            Company name for the registered user of the operating system. Example: "Microsoft Corporation"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.RegisteredUser">
+            <summary>
+            Name of the registered user of the operating system. Example: "Doug Gillespie"
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.InstallDate">
+            <summary>
+            Date object was installed. This property does not require a value to indicate that the object is installed.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiOpSysInfo.LastBootTime">
+            <summary>
+            Date and time the operating system was last restarted.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo">
+            <summary>
+            This object contains information about a machine's processor.
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_Processor WMI class.
+            </para>
+            <para>
+            A machine may have more than one processor so there may be multiple <see cref="T:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo"/> objects in the <see cref="T:Dell.Client.Framework.Common.Discovery.WmiMachineInfo"/> object.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.DeviceID">
+            <summary>
+            Unique identifier of a processor on the system.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.Name">
+            <summary>
+            The label by which the processor is known in the OS.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.Description">
+            <summary>
+            The description of the processor.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.ProcessorId">
+            <summary>
+            An identifier associated with the processor.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.NumCores">
+            <summary>
+            Number of cores for the current instance of the processor. A core is a physical processor on 
+            the integrated circuit. For example, in a dual-core processor this property has a value of 2.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.MaxClockSpeed">
+            <summary>
+            Maximum speed of the processor, in MHz.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiProcessorInfo.CurrentClockSpeed">
+            <summary>
+            Current speed of the processor, in MHz.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo">
+            <summary>
+            This object contains information about a WMI_SystemEnclosure
+            </summary>
+            <remarks>
+            <para>
+            This object provides a C# front-end to various properties in the Win32_SystemEnclosure WMI class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo.Refresh(Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo@,System.String)">
+            <summary>
+            Refresh the given WMI object if necessary.
+            </summary>
+            <param name="info"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo.SMBIOSAssetTag">
+            <summary>
+            The asset tag from the BIOS
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.WmiSystemEnclosureInfo.SerialNumber">
+            <summary>
+            The manufacturer-allocated number used to identify the motherboard - e.g. ".B7F3BK1.CN129619E2335".
+            </summary>
+            <remarks>
+            It has been determined that the use of the motherboard serial number works best for uniquely identifying
+            a machine.
+            </remarks>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.WmiTpmInfo">
+            <summary>
+            This object contains information about a machine's TPM device.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.IsPresent">
+            <summary>
+            This property is set to true if a TPM device was detected by the operating system.  If this value is false, all other properties
+            in this class should be ignored.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.IsEnabled">
+            <summary>
+            Indicates whether the TPM is enabled.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.IsOwned">
+            <summary>
+            Indicates whether the TPM has an owner.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.IsActivated">
+            <summary>
+            Indicates whether the TPM is activated.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.ManufacturerId">
+            <summary>
+            The identifying information that uniquely names the TPM manufacturer - e.g. ("BRCM")
+            </summary>
+            <remarks>
+            When the data is unavailable, an empty string is returned, otherwise it will be a string of up to 4 characters indicating the manufacturer.
+            </remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.ManufacturerVersion">
+            <summary>
+            The version of the TPM as specified by the manufacturer - e.g. ("6.2")
+            </summary>
+            <remarks>
+            When the data is unavailable, an empty string is returned.
+            </remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.SpecVersion">
+            <summary>
+            The version of the Trusted Computing Group (TCG) specification that the TPM supports.
+            </summary>
+            <remarks>
+            This value includes the major and minor TCG specification version, the specification revision level, 
+            and the errata revision level. All values are in hexadecimal. For example, a version information of 
+            "1.2, 2, 0" indicates that the device was implemented to TCG specification version 1.2, revision level 2, and with no errata.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.WmiTpmInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus">
+            <summary>
+            This enumeration specifies an encryption protection status.  It is used at the volume, partition, disk, and machine levels.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus.Default">
+            <summary>
+            The data is in default or initialized state.
+            </summary>
+            <remarks>
+            This value will be set at object construction.  It means that no attempt to determine the protection status has yet been made.  Note this is different from "Unknown".
+            </remarks>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus.Protected">
+            <summary>
+            The data is fully protected.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus.Unprotected">
+            <summary>
+            The data is not protected.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus.Locked">
+            <summary>
+            The data is locked and inaccessible.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus.Unknown">
+            <summary>
+            An attempt was made to determine the status and the result is unknown.  The data could be protected, but should be assumed to unprotected for
+            auditing purposes.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason">
+            <summary>
+            This enumeration specifies why the volume, partition, or disk is protected
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.Default">
+            <summary>
+            Not protected - default value
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.VendorProtected">
+            <summary>
+            Protected because a Vendor reported that it was protected
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.AllPartitionsProtected">
+            <summary>
+            Protected because all partitions are protected
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.AllLogDisksProtected">
+            <summary>
+            Protected because all volumes are protected
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.ParentDriveIsProtected">
+            <summary>
+            Protected because its parent drive is protected
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionProtectedReason.ParentPartitionIsProtected">
+            <summary>
+            Protected because its parent partition is protected
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus">
+            <summary>
+            This enumeration specifies an encryption conversion status.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.Unknown">
+            <summary>
+            The conversion status is unknown.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.FullyDecrypted">
+            <summary>
+            The data is fully decrypted.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.FullyEncrypted">
+            <summary>
+            The data is fully encrypted.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.EncryptionInProgress">
+            <summary>
+            The data is being encrypted.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.DecryptionInProgress">
+            <summary>
+            The data is being decrypted.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.EncryptionPaused">
+            <summary>
+            The data encryption process has been paused.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionConversionStatus.DecryptionPaused">
+            <summary>
+            The data decryption process has been paused.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm">
+            <summary>
+            This enumeration specifies an encryption algorithm.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.None">
+            <summary>
+            No algorithm
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.AES128withDiffUser">
+            <summary>
+            Advanced Encryption Standard (AES) algorithm enhanced with a diffuser layer, using an AES key size of 128 bits.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.AES256withDiffUser">
+            <summary>
+            Advanced Encryption Standard (AES) algorithm enhanced with a diffuser layer, using an AES key size of 256 bits.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.AES128">
+            <summary>
+            Advanced Encryption Standard (AES) algorithm, using an AES key size of 128 bits.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.AES256">
+            <summary>
+            Advanced Encryption Standard (AES) algorithm, using an AES key size of 256 bits.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.Hardware">
+            <summary>
+            Hardware encryption
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.Discovery.EncryptionAlgorithm.Unknown">
+            <summary>
+            The algorithm is unknown
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Discovery.EncryptionInfo">
+            <summary>
+            This object contains encryption information, such as the protection status, encryption percentage, and a list 
+            of vendors providing encryption service.
+            </summary>
+            <remarks>
+            Because encryption information is reported at the disk volume, disk partition, disk drive, and machine levels, this
+            object is included at multiple levels of the inventory reporting.
+            </remarks>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.  Note that the
+            Vendors property is initially set to null.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.#ctor(Dell.Client.Framework.Common.Discovery.EncryptionProtectionStatus,System.Single)">
+            <summary>
+            Constructs a new instance of the object with the specified initial values.  Note that 
+            the Vendors property is initially set to null.
+            </summary>
+            <param name="status">Sets the initial value of the <see cref="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.ProtectionStatus"/> property.</param>
+            <param name="percent">Sets the initial value of the <see cref="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.EncryptionPercentage"/> property.</param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.AddVendorInfo(Dell.Client.Framework.Common.Discovery.EncryptionVendorInfo)">
+            <summary>
+            This method adds a new EncryptionVendorInfo to the list of vendors.  It will create a new
+            list object if necessary.
+            </summary>
+            <param name="info">The vendor information to add to the list.</param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.GetVendorCount">
+            <summary>
+            This method returns the number of vendors in the list or 0 if none have been added yet.
+            </summary>
+            <returns>The number of vendors in the list.</returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.Reset">
+            <summary>
+            This method resets the object to default state, including deleting all vendors in 
+            the list.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Discovery.EncryptionInfo.Rollup">
+            <summary>
+            This method provides a roll-up operation by setting the protection status and 
+            encryption percentages in the object based upon what each vendor has reported for 
+            their protection status and encryption percentages.
+            </summary>
+            <remarks>
+            <para>If there are no vendors in the list, this function does nothing.</para>
+            <para>If there is only one vendor in the list, then the object's protection status and
+            encryption percentage will match what the vendor reported.</para>
+            <para>If there are more than one vendor in the list, then the object's protection status
+            will be protected if any one vendor reports it is protected, and the object's encryption
+            percentage will be the maximum encryption percentage reported by any vendor.</para>
+            </remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.ProtectionStatus">
+            <summary>
+            Contains a enumerated value indicating the protection status.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.ProtectedReason">
+            <summary>
+            Contains a enumerated value indicating the protection status.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.EncryptionPercentage">
+            <summary>
+            Contains the encryption percentage from 0.0 to 100.0.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.Discovery.EncryptionInfo.Vendors">
+            <summary>
+            Contains a list of vendors that are currently providing encryption services at the level 
+            that this object is attached.  Note this value can be null.
+            </summary>
+            <example>
+            This value initially is null when indicates that there are no vendors providing
+            encryption services at this level. 
+            </example>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.PluginInfo">
+            <summary>
+            This class defines the information attributes that must be set on all FrameworkPlugins.  To be valid,
+            a Name, Guid Id, and Version must be specified.  The Description is optional.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.FrameworkThread">
+            <summary>
+            Creates and controls a thread for use in the Framework.  It wraps the .NET Thread class and supplies
+            an unhandled exception handler.  It is preferred that all users of the Framework derive from this object rather 
+            than the .NET Thread class.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.StartThread">
+            <summary>
+            This is the public method that is called to start the thread.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.StopThread">
+            <summary>
+            This public method stops the running thread.  It sets the flag that 
+            indicates the thread should stop.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.OnThreadStart">
+            <summary>
+            This abstract method must be supplied by the derived class.  It is called by the thread in response to a StartThread request.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.OnThreadStop">
+            <summary>
+            This abtract method must be supplied by the derived class.  It is called by the thread in response to a StopThread request.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.Sleep(System.Int32)">
+            <summary>
+            This protected method is provided so that deriving classes can call this method
+            to sleep for a given amount of time and have normal exceptions handled here.
+            </summary>
+            <param name="mSecs"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.OnThreadEntry">
+            <summary>
+            This is the entry point of the thread.  It gets called when the thread first starts.  This 
+            class sets a exception handler for any unhandled exception and then calls the virtual 
+            method so that derived classes can start processing.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.FrameworkThread.SetThreadName">
+            <summary>
+            This private method sets the name of the thread.  This is used for debugging purposes.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.FrameworkThread.IsThreadAlive">
+            <summary>
+            This property is true if the thread is alive 
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.FrameworkThread.ThreadName">
+            <summary>
+            This property gets or sets the thread name.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.FrameworkThread.ThreadAborting">
+            <summary>
+            This property gets or sets the flag that indicates whether or not the thread should stop.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.EventManagerHandler">
+            <summary>
+            This delegate defines an EventManager callback.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.EventManagerArgs">
+            <summary>
+            This class defines the arguments that are sent when the EventManager fires an event.
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.EventManagerArgs.Empty">
+            <summary>
+            Static empty object to be used if no arguments are required
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.EventManagerArgs.Tag">
+            <summary>
+            This property allows an object to be tagged to this class.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManagerArgs.#ctor">
+            <summary>
+            The default constructor for this object. 
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.EventManagerArgs.EventName">
+            <summary>
+            This property contains the name of the event that is firing.  Note that this
+            field will only be set during the event signal.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.EventManager">
+            <summary>
+            This class provides dynamic event registration by maintaining a list of events and their names.  This 
+            class is thread-safe.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.#ctor">
+            <summary>
+            Default constructor for the class.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.RaiseEvent(System.String,System.Object,Dell.Client.Framework.Common.EventManagerArgs)">
+            <summary>
+            Raises or signals the event specified in eventName.  If the event does not exist it will 
+            be automatically created.  This call is thread-safe.
+            </summary>
+            <param name="eventName"></param>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.RaiseEvent(Dell.Client.Framework.Common.Log,System.String,System.Object,Dell.Client.Framework.Common.EventManagerArgs)">
+            <summary>
+            Raises or signals the event specified in eventName.  If the event does not exist it will 
+            be automatically created.  This call is thread-safe.  
+            </summary>
+            <param name="log">Log object to write error messages to if an exception occurs in one of the delegates.</param>
+            <param name="eventName"></param>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.RegisterForEvent(System.String,Dell.Client.Framework.Common.EventManagerHandler)">
+            <summary>
+            This method registers a handler for the given event.  If the event does not exist
+            it will be automatically created. This call is thread-safe.
+            </summary>
+            <param name="eventName"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.DeleteEvent(System.String)">
+            <summary>
+            Deletes an event by name.
+            </summary>
+            <param name="eventName"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.FindEventIndex(System.String)">
+            <summary>
+            Finds an event by name and returns its index or -1 if not found.
+            </summary>
+            <param name="eventName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.EventManager.GetEvent(System.String)">
+            <summary>
+            Finds an event by name.  If the event is not found, it will be automatically created.
+            </summary>
+            <param name="eventName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.OsHelper">
+            <summary>
+            Helper class for providing information about the Operating System
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.DebugHelper">
+            <summary>
+            This class defines static helper functions that are useful for debugging.
+            Note this class is only used for debug builds.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.DebugHelper.SetCulture(System.Threading.Thread,System.String)">
+            <summary>
+            Sets a thread's culture directly.  This is called when threads are
+            created.
+            </summary>
+            <param name="thread"></param>
+            <param name="strProductRegKey" />
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Write(Dell.Client.Framework.Common.Log.LogMsgType,System.String)">
+            <summary>
+            Write a message to log file passing in the message severity
+            </summary>
+            <param name="msg"></param>
+            <param name="msgType"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Write(Dell.Client.Framework.Common.Log.LogMsgType,System.String,System.Object[])">
+            <summary>
+            Write a message to log file passing in the message severity
+            </summary>
+            <param name="msgType"></param>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Dump(System.String)">
+            <summary>
+            Write Information message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Info(System.String)">
+            <summary>
+            Write Information message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Warning(System.String)">
+            <summary>
+            Write warning message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Error(System.String)">
+            <summary>
+            Write error message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Fatal(System.String)">
+            <summary>
+            Write error message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.Debug(System.String)">
+            <summary>
+            Write debug message to log file
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Log.GetMsgTypeTag(Dell.Client.Framework.Common.Log.LogMsgType)">
+            <summary>
+            Given a log message severity, return the string to use in the message header.
+            Currently, for informational or warnings, we just return a single letter ("I" or "W" 
+            respectively). For others, we return a longer string so that errors stand out
+            when viewing the log.
+            </summary>
+            <param name="msgType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.LogFile.InitFileIndex">
+            <summary>
+            Initializes the file index to the oldest created log file, or the first log slot that does
+            not exist.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.LogFile.AdvanceFileIndex">
+            <summary>
+            This is called after it has been detected that the current log file is larger than the maximum 
+            allowed size.  It will advance the file index to the next sequential suffix and delete any
+            preexisting file.  
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.EnableShutdownPrivilege">
+            <summary>
+            This method enables us to issue a shutdown by enabling this privilege.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.GetActiveConsoleSessionId">
+            <summary>
+            This method gets the ID of the session that is currently active.  Note that we can not use the
+            WTSGetActiveConsoleSessionId() call because it did not return the correct ID when using remote desktop.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.GetAppGuid">
+            <summary>
+            Returns the GUID of the application assembly.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.GetUserDisplayName">
+            <summary>
+            Returns the display name of the current user.  If the call to display name fails,
+            it will fall back to the Environment.Username.  Note that if a user is "renamed" in 
+            Windows, the Environment.Username is not changed - only the display name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.IsAnybodyLoggedIn">
+            <summary>
+            Returns true if any user is currently logged in.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.IsRunAsAdmin">
+            <summary>
+            Returns true if the current process is running as an administrator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.StartProcessAndBypassUAC(System.String,Dell.Client.Framework.Common.NativeMethods.PROCESS_INFORMATION@)">
+            <summary>
+            Launches the given application with full admin rights, and in addition bypasses the Vista UAC prompt
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.NativeMethods.GetLoggedOnUserToken">
+            <summary>
+            Returns the Token for the currently logged on user - need to call CloseHandle when complete.
+            Returns IntPtr.Zero if error or no user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.PluginHelper">
+            <summary>
+            Provides helper methods for managing plugins within the Dell Client Framework.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginInfo(System.Type)">
+            <summary>
+            Returns a PluginInfo object given a Type or null if none are found.
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginRequirements(System.Type)">
+            <summary>
+            Returns a list of PluginRequires objects for the given pluginType.
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.LoadPlugins(Dell.Client.Framework.Common.PluginManager,System.Type,Dell.Client.Framework.Common.PluginHelper.LoadPluginCallback,Dell.Client.Framework.Common.Log,System.Reflection.Assembly,System.String,System.String,System.String)">
+            <summary>
+            This method creates a list of plugin types and loads each type whose dependency requirements
+            are met.  As long as at least one plugin is loaded, we continue to check the entire list.  What 
+            will remain in the list are any types that require plugins that are not loaded.  Note, plugins with
+            circular dependencies are not supported and will be left stranded in the list also.
+            </summary>
+            <param name="pluginManager"></param>
+            <param name="interfaceType"></param>
+            <param name="callback"></param>
+            <param name="log"></param>
+            <param name="assembly"></param>
+            <param name="filePath"></param>
+            <param name="wildCard"></param>
+            <param name="regKeyPath"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginLoadList(System.Type,Dell.Client.Framework.Common.Log,System.Reflection.Assembly,System.String,System.String,System.String)">
+            <summary>
+            This method gets the initial plugin load list.  It builds this list by looking for all
+            interface types in this assembly, this assembly's directory, and the registry.
+            </summary>
+            <param name="interfaceType"></param>
+            <param name="log"></param>
+            <param name="assembly"></param>
+            <param name="filePath"></param>
+            <param name="wildCard"></param>
+            <param name="regKeyPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginTypesFromAssembly(System.Collections.Generic.List{System.Type}@,Dell.Client.Framework.Common.Log,System.Reflection.Assembly,System.Type)">
+            <summary>
+            Returns a list of plugin types from an Assembly that are of the specified classType.
+            </summary>
+            <param name="list"></param>
+            <param name="log"></param>
+            <param name="assembly"></param>
+            <param name="classType"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginTypesFromDirectory(System.Collections.Generic.List{System.Type}@,Dell.Client.Framework.Common.Log,System.String,System.String,System.Type)">
+            <summary>
+            Returns a list of plugin types from a directory of assemblies that are of the specified classType.
+            </summary>
+            <param name="list"></param>
+            <param name="log"></param>
+            <param name="filePath"></param>
+            <param name="fileWildcard"></param>
+            <param name="classType"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.GetPluginTypesFromRegistry(System.Collections.Generic.List{System.Type}@,Dell.Client.Framework.Common.Log,Microsoft.Win32.RegistryKey,System.Type)">
+            <summary>
+            Returns a list of plugin types from an Assembly that is defined in the registry that are of the specified classType.
+            </summary>
+            <param name="list"></param>
+            <param name="log"></param>
+            <param name="regKey"></param>
+            <param name="classtype"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginHelper.IsAssemblySigned(System.Reflection.Assembly)">
+            <summary>
+            Returns true if the given assembly is signed with the executing assembly's certificate.  Note this is
+            disabled in debug builds.
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.PluginHelper.LoadPluginCallback">
+            <summary>
+            This delegate defines the callback that is used for the LoadPlugins method.
+            </summary>
+            <param name="t"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.IFrameworkPlugin">
+            <summary>
+            This interface defines the methods that a plugin must implement in order to be loaded by the PluginManager.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.PluginManager">
+            <summary>
+            This class implements plugin management methods.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.#ctor">
+            <summary>
+            This is the default constructor for the PluginManager object.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.AddPlugin(Dell.Client.Framework.Common.IFrameworkPlugin)">
+            <summary>
+            This method adds a new plugin to the list of managed plugins.
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.AreRequiredIdsFound(System.Type)">
+            <summary>
+            This method returns true if the given type's plugin requirements are found in 
+            the list of plugins.  In other words, if this type requires other plugins,
+            this method returns true if those plugins are currently in the active list.
+            Also, the required version (if set) can not be greater than the plugin's version.
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.FindPluginByGuid(System.Guid)">
+            <summary>
+            Returns a plugin interface with the specified Guid, or null if not found
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.FindPluginById(System.String)">
+            <summary>
+            Returns a plugin interface with the specified Id, or null if not found
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.FindPluginByType(System.Type)">
+            <summary>
+            Returns the first plugin interface with the specified interface type, or null if not found
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.FindPluginsByType(System.Type)">
+            <summary>
+            Returns a list of plugin interfaces with the specified interface type.
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.RemovePlugin(Dell.Client.Framework.Common.IFrameworkPlugin)">
+            <summary>
+            This method removes a plugin from the list of managed plugins.
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.PluginManager.RemovePlugins">
+            <summary>
+            Remove all loaded plugins
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.PluginManager.Count">
+            <summary>
+            Gets the number of plugins currently loaded.
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.PluginManager.Plugin">
+            <summary>
+            This class defines a plugin entry 
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.RebootPolicy">
+            <summary>
+            This object defines the policies that control how system reboots are presented to the user.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.RebootPolicy.#ctor">
+            <summary>
+            Initializes a new instance of the object with default values.
+            </summary>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.RebootPolicy.NumDelays">
+            <summary>
+            The number of time that the user is allowed to delay (or postpone) the reboot.
+            </summary>
+            <remarks>
+            A value of zero means that the user will not be given the option to postpone the reboot.  The default value is 5.
+            </remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.RebootPolicy.NumSecondsBetweenDelays">
+            <summary>
+            The number of seconds allowed between each delay before presenting the reboot dialog again.
+            </summary>
+            <remarks>
+            This value is ignored if NumDelays is zero.  The default value is 300 (5 minutes).</remarks>
+        </member>
+        <member name="P:Dell.Client.Framework.Common.RebootPolicy.NumSecondsBeforeShutdown">
+            <summary>
+            The number of seconds to delay before an automatic shutdown/reboot occurs
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.SecureData.DeleteDataFromRegistry(Dell.Client.Framework.Common.Log,Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            This is the plubic method that can be called to remove encrypted data from the registry
+            </summary>
+            <param name="log"></param>
+            <param name="regKey"></param>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.SecureData.LoadDataFromFile(Dell.Client.Framework.Common.Log,System.Type,System.String)">
+            <summary>
+            This is the public method that can be called to load data from a secure state file.  This
+            method first attempts to load a version 2 state file (one encrypted with a unique machine key).  If this
+            fails, it will attempt to load with a version 1 file (which was not machine dependent).  When the 
+            file is rewritten, it will be automatically upgraded to a version 2 format.
+            </summary>
+            <param name="log"></param>
+            <param name="objType"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.SecureData.LoadDataFromRegistry(Dell.Client.Framework.Common.Log,System.Type,Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            This is the plublic method that can be called to securely load encrypted data from the registry.
+            </summary>
+            <param name="log"></param>
+            <param name="objType"></param>
+            <param name="regKey"></param>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.SecureData.SaveDataToFile(Dell.Client.Framework.Common.Log,System.Object,System.String)">
+            <summary>
+            This is the public method that can be called to save data to a secure state file.  It will
+            automatically save the serialized object in the most recent format.
+            </summary>
+            <param name="log"></param>
+            <param name="o"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.SecureData.SaveDataToRegistry(Dell.Client.Framework.Common.Log,System.Object,Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            This public method saves an object to the registry by storing an encrypted
+            serialized XML string.
+            </summary>
+            <param name="Log"></param>
+            <param name="o"></param>
+            <param name="regKey"></param>
+            <param name="valueName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Services.ILogServiceCallback">
+            <summary>
+            Defines the interface that Framework's Agent can use to callback a client
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.Services.LogServiceClient.ConvertMsgToLocalTime(System.String)">
+            <summary>
+            This method converts the messages from UTC time to local time
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.Services.ILogService">
+            <summary>
+            Defines the service interface the Framework's Logging service
+            </summary>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.StringHelper">
+            <summary>
+            This class defines static helper functions that are useful for manipulating strings.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.StringHelper.ClearString(System.String@)">
+            <summary>
+            Clears a string by overwriting the string with zeros.  This is useful for 
+            clearing sensitive data like passwords.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.StringHelper.CountStringOccurrances(System.String,System.Char[])">
+            <summary>
+            Returns the number of times that a character in 'text' is in the given array
+            </summary>
+            <param name="text"></param>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.StringHelper.SecureStringToString(System.Security.SecureString)">
+            <summary>
+            Returns a string from a SecureString
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.StringHelper.StringToSecureString(System.String@)">
+            <summary>
+            Returns a new SecureString object that holds the given string.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.ToasterMsgResult.Clicked">
+            <summary>
+            The user clicked the toaster dialog
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.ToasterMsgResult.CloseBoxClicked">
+            <summary>
+            The user clicked the close box
+            </summary>
+        </member>
+        <member name="F:Dell.Client.Framework.Common.ToasterMsgResult.TimerExpired">
+            <summary>
+            The timer expired without the user doing anything
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.#ctor">
+            <summary>
+            Construct object only
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.#ctor(System.String)">
+            <summary>
+            Construct object and connect to namespace
+            </summary>
+            <param name="nameSpace"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.#ctor(System.String,System.String)">
+            <summary>
+            Construct object, connect to name space, and query all class objects
+            </summary>
+            <param name="nameSpace"></param>
+            <param name="className"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Construct object, connect to name space on remote computer, and query all class objects
+            </summary>
+            <param name="nameSpace"></param>
+            <param name="className"></param>
+            <param name="computerName"></param>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.Connect(System.String)">
+            <summary>
+            Connect to the given name space on the local machine
+            </summary>
+            <param name="nameSpace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.QueryObjects(System.String)">
+            <summary>
+            Query the number of instances for the given className and build the collection.
+            </summary>
+            <param name="className"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.ConnectAndQueryObjects(System.String,System.String)">
+            <summary>
+            Connect to the given name space and query the number objects.  
+            </summary>
+            <param name="nameSpace"></param>
+            <param name="className"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiHelper.ConnectAndQueryObjects(System.String,System.String,System.String)">
+            <summary>
+            Connect to the given name space on a target machine and query the number objects.  
+            </summary>
+            <param name="nameSpace"></param>
+            <param name="className"></param>
+            <param name="computerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiWatcher.Dispose">
+            <summary>
+            Required public method to release allocated resources.  Calls the protected virtual
+            Dispose method so derived classes can dispose of their IDisposable objects also.
+            </summary>
+        </member>
+        <member name="M:Dell.Client.Framework.Common.WmiWatcher.Dispose(System.Boolean)">
+            <summary>
+            Defines a protected virtual method so derived classes can dispose of their IDisposable objects when the 
+            public Dispose() method is called.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Dell.Client.Framework.Common.XmlHelperTest">
+            <summary>
+            This class must be public.
+            </summary>
+        </member>
+    </members>
+</doc>

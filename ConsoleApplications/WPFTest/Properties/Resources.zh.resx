@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Test" xml:space="preserve">
-    <value>测试</value>
+    <value>为了能够向您提供重要更新和改进的支持服务，戴尔需要有关您和您的系统的更多信息。</value>
   </data>
 </root>

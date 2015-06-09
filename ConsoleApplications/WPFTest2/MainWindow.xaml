@@ -1,0 +1,8 @@
+﻿<Window x:Class="WPFTest2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBlock Text="为了能够向您提供重要更新和改进的支持服务，戴尔需要有关您和您的系统的更多信息。" FontFamily="Museo For Dell 100"/>
+    </Grid>
+</Window>

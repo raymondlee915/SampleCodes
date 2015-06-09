@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace NormalTest
@@ -39,6 +40,13 @@ namespace NormalTest
 
             var lcFolder = Environment.ExpandEnvironmentVariables(@"%SystemDrive%\Program Files\Dell\Dell Help & Support");
             Console.WriteLine("With LC: {0}, LCFolder = {1}", Directory.Exists(lcFolder), lcFolder);
+
+            //string input = "disposable.style.email.with+symbol@example.com";
+            //Regex regex = new Regex(@"^[^\]\\\\.[@:;<>%#,`\t |][^\]\\\\[@:;<>%#,`\t |]*@([^\]\\\\[@:;<>%#,`\t .|]+[.])+[^.0-9][^\]\\\\[@:;<>%#,`\t 0-9|]+$");
+            //Console.WriteLine(regex.IsMatch(input));
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            Console.WriteLine(path);
 
             Console.WriteLine("Done");
             Console.ReadKey();
