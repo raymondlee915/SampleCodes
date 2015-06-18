@@ -1,13 +1,26 @@
 ﻿<Window x:Class="WPFTest.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Window1" Height="300" Width="600">
+        Title="Window1" Height="500" Width="600">
     <StackPanel>
-        <Label Content="With Museo For Dell 100:"></Label>
-        <TextBlock Text="Ελευθερία δημιουργίας στις άκρες των δακτύλων σας" FontSize="48" FontFamily="Museo For Dell 100"/>
+        <Label Content="Museo For Dell 100, Segoe UI:"></Label>
+        <TextBlock x:Name="tbLabel" Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48" FontFamily="Museo For Dell 100, Segoe UI"/>
 
-        <Label Content="With default font by WPF:"></Label>
-        <TextBlock Text="Ελευθερία δημιουργίας στις άκρες &#10; των δακτύλων σας" FontSize="48"/>
+        <Label Content="by default:"></Label>
+        <TextBlock x:Name="tbHebrew" Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48"/>
+
+        <Label Content="Museo For Dell 100, MS YaHei UI:"></Label>
+        <TextBlock Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48" FontFamily="Museo For Dell 100, Microsoft YaHei UI"/>
+
+        <Label Content="Museo For Dell 100"></Label>
+        <TextBlock Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48" FontFamily="Museo For Dell 100"/>
+        
+        <Label Content="Segoe UI"></Label>
+        <TextBlock Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48" FontFamily="Segoe UI"/>
+
+        <Label Content="Microsoft YaHei UI"></Label>
+        <TextBlock Text="通话， 似的发射点：啊手动阀手动阀" FontSize="48" FontFamily="Microsoft YaHei UI"/>
+
 
     </StackPanel>
 </Window>

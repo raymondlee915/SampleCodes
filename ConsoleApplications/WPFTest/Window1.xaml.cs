@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,15 @@ namespace WPFTest
         public Window1()
         {
             InitializeComponent();
+            this.Title = "ברוכים הבאים dell החדשות שלך";
+
+            //tbLabel.FlowDirection = System.Windows.FlowDirection.RightToLeft;
+           // tbLabel.TextAlignment = TextAlignment.Right;
+            //this.FlowDirection = System.Windows.FlowDirection.RightToLeft;
+           // tbHebrew.FlowDirection = System.Windows.FlowDirection.RightToLeft;
+            string message =string.Join(", ", System.Windows.SystemFonts.MessageFontFamily.FamilyNames.Select(p => string.Format("{0}:{1}", p.Key, p.Value)));
+            MessageBox.Show(message);
+            //MessageBox.Show(System.Windows.SystemFonts.MessageFontFamily.FamilyNames)
         }
     }
 }

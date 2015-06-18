@@ -1,0 +1,13 @@
+﻿<Window x:Class="WPFTest.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="600">
+    <StackPanel>
+        <Label Content="With Museo For Dell 100:"></Label>
+        <TextBlock x:Name="tbLabel" Text="this is a test" FontSize="48" FontFamily="Museo For Dell 100"/>
+
+        <Label Content="With default font by WPF:"></Label>
+        <TextBlock Text="ברוכים הבאים dell החדשות שלך" FontSize="48"/>
+
+    </StackPanel>
+</Window>

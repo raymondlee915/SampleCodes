@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RegexConsoleTest
@@ -27,34 +28,137 @@ namespace RegexConsoleTest
 
         static void Main(string[] args)
         {
-            string pattern = "<img\\s[^>]*src=[\"\']{1}([^\"']+)";
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ja-JP");
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ja-JP");
+
+            string pattern = "^[\u4e00-\u9fa5]";
             Regex imgeRegex = new Regex(pattern, RegexOptions.IgnoreCase);
-
-            string source = @"<div class=""sg-unit sg-col-first sg-colspan-1"" style=""font: 13px/20px WOL_Reg, &quot;Segoe UI&quot;, Tahoma, Helvetica, sans-serif; width: 227px; text-align: left; color: rgb(80, 80, 80); text-transform: none; text-indent: 0px; letter-spacing: normal; margin-left: 0px; word-spacing: 0px; vertical-align: top; display: inline-block; white-space: normal; font-size-adjust: none; font-stretch: normal; -webkit-text-stroke-width: 0px;"">
-<div class=""section sectionNormal"" style=""display: inline; min-height: 0px;"">
-<div>
-<h4>Step 3</h4>
-
-<p>Tap or click <strong>Pin to Start</strong> or <strong>Pin to taskbar</strong>. The apps you pinned will appear at the end of your Start screen or desktop taskbar.</p>
-</div>
-</div>
-</div>
-
-<div class=""sg-unit sg-colspan-3"" style=""font: 13px/20px WOL_Reg, &quot;Segoe UI&quot;, Tahoma, Helvetica, sans-serif; width: 741px; text-align: left; color: rgb(80, 80, 80); text-transform: none; text-indent: 0px; letter-spacing: normal; margin-left: 29.93px; word-spacing: 0px; vertical-align: top; display: inline-block; white-space: normal; font-size-adjust: none; font-stretch: normal; -webkit-text-stroke-width: 0px;"">
-<div class=""section sectionNormal lastElement"" style=""margin-bottom: 0px; display: inline; min-height: 0px;"">
-<div>
-<div class=""para lastElement"" style=""color: rgb(80, 80, 80); line-height: 20px; font-size: 13px; margin-bottom: 0px;""><img alt=""Pin options"" class=""embedObject standalone"" src=""http://res2.windows.microsoft.com/resbox/en/6.3/2013-win81ga/44153aa8-8bc6-4e0e-9a68-d405c05225a5_28.png"" style=""border-image:none; border:currentColor; height:197px; max-width:100%; width:281px"" /></div>
-</div>
-</div>
-</div>";
-            var result = imgeRegex.Matches(source);
-            foreach (var item in result)
+            byte second = 0x30;
+            byte first = 0xA1;
+            int from = 0X30a1;
+            int end = 0x30fe;
+            byte[] chars = new byte[end - from + 1];
+            for (int i = 0; i < chars.Length; i++)
             {
-                var match = item as Match;
-                Console.WriteLine(match.Groups[1]);
+                if(i%2 == 0)
+                {
+                    chars[i] = first++;
+                }
+                else
+                {
+                    chars[i] = second;
+                }
             }
+           
+            string source = @"津小瀬";
+            byte[] bytes = Encoding.Default.GetBytes(source);
+            Encoding encoder = Encoding.Unicode;
+            byte[] unicodes = Encoding.Convert(Encoding.Default, encoder, bytes);
+
+            var converted = encoder.GetString(chars);
+            Console.WriteLine(converted);
+
+            //foreach (var item in source)
+            //{
+            //    Console.WriteLine("{0:X000}", Convert.ToInt32(item));
+            //}
+
+
+            //foreach (var item in converted)
+            //{
+            //    Console.WriteLine("{0:X000}", Convert.ToInt32(item));
+            //}
+
+            Console.WriteLine(imgeRegex.IsMatch(source));
+
+            Console.WriteLine("Done");
+
+            // Test();
 
             Console.ReadKey();
+        }
+
+        private static void Test()
+        {
+            //英文字符串
+            string str_en = "Welcome to the Encoding world.";
+            //简体中文
+            string str_cn = "欢迎来到编码世界！";
+            //繁体中文
+            string str_tw = "歡迎來到編碼世界";
+
+            Encoding defaultEncoding = Encoding.Default;
+            Console.WriteLine("默认编码：{0}", defaultEncoding.BodyName);
+
+
+            Encoding dstEncoding = null;
+            //ASCII码
+            Console.WriteLine("----ASCII编码----");
+            dstEncoding = Encoding.ASCII;
+            OutputByEncoding(defaultEncoding, dstEncoding, str_en);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_cn);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_tw);
+
+            OutputBoundary();
+
+            //GB2312
+            Console.WriteLine("----GB2312编码----");
+            dstEncoding = Encoding.GetEncoding("GB2312");
+            OutputByEncoding(defaultEncoding, dstEncoding, str_en);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_cn);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_tw);
+
+            OutputBoundary();
+
+            //BIG5
+            Console.WriteLine("----BIG5编码----");
+            dstEncoding = Encoding.GetEncoding("BIG5");
+            OutputByEncoding(defaultEncoding, dstEncoding, str_en);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_cn);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_tw);
+
+            OutputBoundary();
+
+            //Unicode
+            Console.WriteLine("----Unicode编码----");
+            dstEncoding = Encoding.Unicode;
+            OutputByEncoding(defaultEncoding, dstEncoding, str_en);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_cn);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_tw);
+
+            OutputBoundary();
+
+            //UTF8
+            Console.WriteLine("----UTF8编码----");
+            dstEncoding = Encoding.UTF8;
+            OutputByEncoding(defaultEncoding, dstEncoding, str_en);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_cn);
+            OutputByEncoding(defaultEncoding, dstEncoding, str_tw);
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="srcEncoding">原编码</param>
+        /// <param name="dstEncoding">目标编码</param>
+        /// <param name="srcBytes">原</param>
+        public static void OutputByEncoding(Encoding srcEncoding, Encoding dstEncoding, string srcStr)
+        {
+            byte[] srcBytes = srcEncoding.GetBytes(srcStr);
+            Console.WriteLine("Encoding.GetBytes: {0}", BitConverter.ToString(srcBytes));
+            byte[] bytes = Encoding.Convert(srcEncoding, dstEncoding, srcBytes);
+            Console.WriteLine("Encoding.GetBytes: {0}", BitConverter.ToString(bytes));
+            string result = dstEncoding.GetString(bytes);
+            Console.WriteLine("Encoding.GetString: {0}", result);
+        }
+        /// <summary>
+        /// 分割线
+        /// </summary>
+        public static void OutputBoundary()
+        {
+            Console.WriteLine("------------------------------------");
         }
     }
 }
