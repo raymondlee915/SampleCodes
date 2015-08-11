@@ -40,7 +40,7 @@ namespace RegexConsoleTest
             byte[] chars = new byte[end - from + 1];
             for (int i = 0; i < chars.Length; i++)
             {
-                if(i%2 == 0)
+                if (i % 2 == 0)
                 {
                     chars[i] = first++;
                 }
@@ -49,7 +49,7 @@ namespace RegexConsoleTest
                     chars[i] = second;
                 }
             }
-           
+
             string source = @"津小瀬";
             byte[] bytes = Encoding.Default.GetBytes(source);
             Encoding encoder = Encoding.Unicode;
@@ -159,6 +159,16 @@ namespace RegexConsoleTest
         public static void OutputBoundary()
         {
             Console.WriteLine("------------------------------------");
+        }
+
+
+        private static void DellURLCheck()
+        {
+            Regex dellServerValidation = new Regex(@"^http(s)?://[^\.]*\.dell\.com\");
+            string[] input1 = new string[] {"http://dellupdater.dell.com/non_du/Kickstart/Test_Kickstart/Features/",
+                                "https://dellupdater.dell.com/non_du/Kickstart/Test_Kickstart/Registration/"
+                              };
+
         }
     }
 }

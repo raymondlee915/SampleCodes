@@ -10,8 +10,8 @@ namespace JSONValidator
     {
         static void Main(string[] args)
         {
-            string folderPath = @"D:\Dell\KickStart\Dev\Source\Plugins\Features\Source\Plugin\Content\features";
-            string[] filePaths = Directory.GetFiles(folderPath, "*.json", SearchOption.TopDirectoryOnly);
+            string folderPath = @"D:\Dell\KickStart\Dev\Source\KickStart.ConsoleService\bin\Debug\Content";
+            string[] filePaths = Directory.GetFiles(folderPath, "*.json", SearchOption.AllDirectories);
             foreach (string file in filePaths)
             {
                 using (StreamReader fileReader = new StreamReader(file, true))
@@ -28,6 +28,7 @@ namespace JSONValidator
             }
 
             Console.WriteLine("done");
+            Console.ReadKey();
         }
     }
 }

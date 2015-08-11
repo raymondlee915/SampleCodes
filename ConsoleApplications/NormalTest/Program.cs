@@ -49,30 +49,12 @@ namespace NormalTest
 
             //string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             //Console.WriteLine(path);
-            string username = "Everyone";
-            var rights = System.Security.AccessControl.FileSystemRights.FullControl;
-            var folderPath = @"C:\ProgramData\Dell\Dell Product Registration";
-            var allowOrDeny = System.Security.AccessControl.AccessControlType.Allow;
-
-           bool result = false;
-           InheritanceFlags inherits = InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit;
-           var propagateToChildren = PropagationFlags.None;
-           var addResetOrRemove = AccessControlModification.Add;
-
-           DirectoryInfo folder = new DirectoryInfo(folderPath);
-           DirectorySecurity security = folder.GetAccessControl(AccessControlSections.All);
-           FileSystemAccessRule accRule;
-           if ("Everyone".Equals(username, System.StringComparison.InvariantCultureIgnoreCase))
-           {
-               var si = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
-               accRule = new FileSystemAccessRule(si, rights, inherits, propagateToChildren, allowOrDeny);
-           }
-           else
-           {
-               accRule = new FileSystemAccessRule(username, rights, inherits, propagateToChildren, allowOrDeny);
-           }
-           security.ModifyAccessRule(addResetOrRemove, accRule, out result);
-           folder.SetAccessControl(security);
+            var path = @"C:\Program Files\Dell\Dell Product Registration\Content\beautyshot\..\..\..\features\features-ar.json";
+            Console.WriteLine(File.Exists(path));
+            var validPath = Path.GetFullPath(@"C:\Program Files\Dell\Dell Product Registration\Content");
+            var folder = Path.GetFullPath(path);
+            Console.WriteLine(folder.StartsWith(validPath));
+            Console.WriteLine(folder);
             Console.WriteLine("Done");
             Console.ReadKey();
         }
