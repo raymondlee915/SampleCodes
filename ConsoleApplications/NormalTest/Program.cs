@@ -10,6 +10,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace NormalTest
 {
@@ -27,7 +28,7 @@ namespace NormalTest
             //Console.WriteLine("default key {0}", ins.GetDefaultKey());
             //Console.WriteLine(" key {0}", ins.Getkey());
 
-           // var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            // var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             //var value = GetUserDefaultUILanguage();
             //Console.WriteLine(value);
 
@@ -49,18 +50,35 @@ namespace NormalTest
 
             //string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             //Console.WriteLine(path);
-            var path = @"C:\Program Files\Dell\Dell Product Registration\Content\beautyshot\..\..\..\features\features-ar.json";
-            Console.WriteLine(File.Exists(path));
-            var validPath = Path.GetFullPath(@"C:\Program Files\Dell\Dell Product Registration\Content");
-            var folder = Path.GetFullPath(path);
-            Console.WriteLine(folder.StartsWith(validPath));
-            Console.WriteLine(folder);
+            //var path = @"C:\Program Files\Dell\Dell Product Registration\Content\beautyshot\..\..\..\features\features-ar.json";
+            //Console.WriteLine(File.Exists(path));
+            //var validPath = Path.GetFullPath(@"C:\Program Files\Dell\Dell Product Registration\Content");
+            //var folder = Path.GetFullPath(path);
+            //Console.WriteLine(folder.StartsWith(validPath));
+            //Console.WriteLine(folder);
+
+            var parent = Task.Factory.StartNew(() =>
+            {
+                Console.WriteLine("Parent task executing.");
+                var child = Task.Factory.StartNew(() =>
+                {
+                    Console.WriteLine("Attached child starting.");
+                    Thread.SpinWait(5000000);
+                    Console.WriteLine("Attached child completing.");
+                }, TaskCreationOptions.AttachedToParent);
+
+
+                Console.WriteLine("Parent task done.");
+            });
+            parent.Wait();
+            Console.WriteLine("Parent has completed.");
+
             Console.WriteLine("Done");
             Console.ReadKey();
         }
 
-      
-          [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
+
+        [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
         static extern System.UInt16 GetUserDefaultUILanguage();
     }
 }

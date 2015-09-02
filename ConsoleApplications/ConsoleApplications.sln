@@ -49,6 +49,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular101", "Angular101\An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRSvc", "PRSvc\PRSvc.csproj", "{D4D65905-93D6-4D06-BD64-89D16F8EC591}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOBETest", "OOBETest\OOBETest.csproj", "{30B8E0A5-5DBE-48FA-AEE4-0E9AC4664F06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCTest", "MVCTest\MVCTest.csproj", "{C9659C06-8AE6-4E60-B717-8E3D191A684F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +151,14 @@ Global
 		{D4D65905-93D6-4D06-BD64-89D16F8EC591}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4D65905-93D6-4D06-BD64-89D16F8EC591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4D65905-93D6-4D06-BD64-89D16F8EC591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B8E0A5-5DBE-48FA-AEE4-0E9AC4664F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B8E0A5-5DBE-48FA-AEE4-0E9AC4664F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B8E0A5-5DBE-48FA-AEE4-0E9AC4664F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B8E0A5-5DBE-48FA-AEE4-0E9AC4664F06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9659C06-8AE6-4E60-B717-8E3D191A684F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9659C06-8AE6-4E60-B717-8E3D191A684F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9659C06-8AE6-4E60-B717-8E3D191A684F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9659C06-8AE6-4E60-B717-8E3D191A684F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
