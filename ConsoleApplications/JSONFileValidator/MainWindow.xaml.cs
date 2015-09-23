@@ -42,6 +42,9 @@ namespace JSONFileValidator
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
+                dialog.SelectedPath = selectedPath;
+                dialog.RootFolder = Environment.SpecialFolder.MyComputer;
+               
                 var result = dialog.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
@@ -57,9 +60,9 @@ namespace JSONFileValidator
 
         private async void btnGo_Click(object sender, RoutedEventArgs e)
         {
-            await ClearMessage();
+            ClearMessage();
 
-            await AddMessage("Start validation....");
+            AddMessage("Start validation....");
 
             string[] filePaths = Directory.GetFiles(selectedPath, "*.json", SearchOption.AllDirectories);
             foreach (string file in filePaths)
@@ -69,64 +72,57 @@ namespace JSONFileValidator
                     object obj = null;
                     var fileName = System.IO.Path.GetFileName(file);
 
-                    await Task.Run(() =>
+                    try
                     {
-                        try
-                        {
-                            obj = Newtonsoft.Json.JsonConvert.DeserializeObject(fileReader.ReadToEnd());
-                            //Thread.Sleep(500);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("file: {0}, error: {1}", fileName, ex.Message);
-                        }
-                    });
+                        var contentJson = await fileReader.ReadToEndAsync();
+                        obj =await Newtonsoft.Json.JsonConvert.DeserializeObjectAsync(contentJson);
+                        //Thread.Sleep(500);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("file: {0}, error: {1}", fileName, ex.Message);
+                    }
+
 
                     if (obj == null)
                     {
-                        await AddErrorMessage(fileName);
+                        AddErrorMessage(fileName);
                     }
                     else
                     {
-                        await AddSuccessMessage(fileName);
+                        AddSuccessMessage(fileName);
                     }
                 }
             }
 
-            await AddMessage("End validation....");
+            AddMessage("End validation....");
         }
 
-        private async Task AddErrorMessage(string fileName)
+        private void AddErrorMessage(string fileName)
         {
             string format = "{0}: error.";
             format = string.Format(format, fileName);
-            await AddMessage(format, Brushes.Red);
+            AddMessage(format, Brushes.Red);
         }
 
-        private async Task AddSuccessMessage(string fileName)
+        private void AddSuccessMessage(string fileName)
         {
             string format = "{0}: succed.";
             format = string.Format(format, fileName);
-            await AddMessage(format, Brushes.Green);
+            AddMessage(format, Brushes.Green);
         }
 
-        private async Task AddMessage(string message)
+        private void AddMessage(string message)
         {
-            await AddMessage(message, Brushes.Black);
+            AddMessage(message, Brushes.Black);
         }
 
-        private async Task AddMessage(string message, Brush foreground)
+        private void AddMessage(string message, Brush foreground)
         {
             System.Windows.Controls.Label label = new System.Windows.Controls.Label();
             label.Content = message;
             label.Foreground = foreground;
-            await Task.Run(() =>
-            {
-                this.ErrorPanel.Dispatcher.Invoke(() =>
-                {
-                    this.ErrorPanel.Children.Add(label);
-                });
-            });
+            this.ErrorPanel.Children.Add(label);
         }
 
         private async Task ClearMessage()
