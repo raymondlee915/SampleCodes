@@ -373,6 +373,9 @@ namespace KSModelSimulator
             list.Add(new Pair("Optiplex 9600"));
             list.Add(new Pair("Precision 3547"));
             list.Add(new Pair("Venue 11 Pro 5130"));
+            list.Add(new Pair("Alienware 15"));
+            list.Add(new Pair("Optiplex 7020"));
+            list = list.OrderBy(p => p.Text).ToList();
             _models = new CollectionView(list);
 
             var list2 = new List<Pair>();
